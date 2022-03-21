@@ -1,106 +1,19 @@
-import React,{useState} from 'react'
-import { KeyboardAvoidingView, StyleSheet, Text, View, TextInput, TouchableOpacity, Keyboard, ScrollView } from 'react-native';
-import Task from './components/Task';
+import React from "react";
+import TodoList from "./Main/TodoList";
+import { PersistGate } from "redux-persist/integration/react";
+import reduxStore from './Main/Redux/store'
+import { Provider } from "react-redux";
+import { MessageBar } from "react-native-messages";
 
-export default function App() {
-
-  const [task,setTask] = useState();
-  const [taskItems,setTaskItems] = useState([]);
-
-  const handlerAddTask = () => {
-    Keyboard.dismiss();
-    console.log(task);
-    setTaskItems([...taskItems,task]);
-    setTask(null);
-  }
-
-  const Completetask = (index) =>{
-    let itemsCopy = [...taskItems];
-    itemsCopy.splice(index,1);
-    setTaskItems(itemsCopy);
-  }
-
-  return (
-    <View style={styles.container}>
-      <View style={styles.taskWrapper}>
-
-        <Text style={styles.sectionTitle}>Today's notes</Text>
-        <ScrollView style={styles.items}>
-          {
-            taskItems.map((item,index)=>{
-              return(
-                <TouchableOpacity key={index} onPress={()=>Completetask(index)}>
-                    <Task text={item}/>
-                </TouchableOpacity>
-              )
-            })
-          }
-        </ScrollView>
-      </View>
-
-    <KeyboardAvoidingView
-    behaviour={Platform.OS === 'ios' ? 'padding' : 'height'}
-    style={styles.writeTaskWrapper}
-    >
-      <TextInput style={styles.input}
-      placeholder={"Write task here"}
-      value={task}
-      onChangeText={text => setTask(text)}
-      />
-      <TouchableOpacity onPress={() => handlerAddTask()}>
-        <View style={styles.addWrapper}>
-          <Text style={styles.addText}>+</Text>
-        </View>
-      </TouchableOpacity>
-      </KeyboardAvoidingView>
-    </View>
-  );
+const app = () => {
+  const {store,persistor} = reduxStore()
+  return(
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <TodoList/>
+      </PersistGate>
+    </Provider>
+  )
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#E8EAED',
-  },
-  taskWrapper:{
-    paddingHorizontal:20,
-    paddingTop:80,
-  },
-  sectionTitle:{
-    fontSize:24,
-    fontWeight:'bold'
-  },
-  items:{
-    marginTop:30
-  },
-  writeTaskWrapper:{
-    position:'absolute',
-    bottom:40,
-    width:'100%',
-    flexDirection:'row',
-    justifyContent:'space-around',
-    alignItems: 'center',
-  },
-  input:{
-    paddingVertical:15,
-    width:250,
-    paddingHorizontal:15,
-    borderRadius:60,
-    backgroundColor:'#fff',
-    borderColor:'#C0C0C0',
-    borderWidth:1,
-  },
-  addWrapper:{
-    width:60,
-    height:60,
-    backgroundColor:"#fff",
-    borderRadius:60,
-    justifyContent:'center',
-    alignItems:'center',
-    borderWidth:1,
-    borderColor:'#C0C0C0',
-  },
-  addText:{
-
-  }
-});
+export default app
