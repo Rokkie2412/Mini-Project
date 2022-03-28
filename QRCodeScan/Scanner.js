@@ -3,15 +3,15 @@ import React,{useState,useEffect,useRef} from "react"
 import { RNCamera } from "react-native-camera"
 import {View,StyleSheet,Text,Linking,Image,Pressable,Dimensions,Modal} from 'react-native'
 import QRCodeScanner from "react-native-qrcode-scanner"
-import Feather from 'react-native-vector-icons/Feather'
 import Ion from 'react-native-vector-icons/Ionicons'
+import FontAwesome from 'react-native-vector-icons/MaterialCommunityIcons'
+import * as Animatable from "react-native-animatable"
 const Scanner = ({navigation}) => {
-  const [modal,setModal] = useState(true)
   const [scan,setScan] = useState(false)
   const [result,setResult] = useState(null)
   const [torch,setTorch] = useState(false)
   const SCREEN_HEIGHT = Dimensions.get('window').height
-  const SCREEN_WIDTH = Dimensions.get("window").width;
+  const SCREEN_WIDTH = Dimensions.get('window').width
   const scanner = useRef(null)
    const handerTorch = () => {
     if(torch === true){
@@ -25,14 +25,21 @@ const Scanner = ({navigation}) => {
   const onSuccess = e => {
     setResult(e)
     setScan(false)
-
-    // if(e.data.substring(0,4) === 'http'){
-    //   alert(e.data)
-    // }
     Linking.openURL(e.data).catch(err =>
       console.error('An error occured', err)
     );
   };
+
+   function makeSlideOutTranslation(translationType, fromValue) {
+    return {
+      from: {
+        [translationType]: SCREEN_WIDTH * -0.18
+      },
+      to: {
+        [translationType]: fromValue
+      }
+    };
+  }
   
 
   return(
@@ -41,19 +48,40 @@ const Scanner = ({navigation}) => {
       ref={scanner}
       reactivate={true}
       flashMode={handerTorch()}
-      containerStyle={{flex:1,height:SCREEN_HEIGHT}}
-      cameraStyle={[{height:SCREEN_HEIGHT,position:'absolute'}]}
+      // containerStyle={{flex:1,height:SCREEN_HEIGHT}}
+      cameraStyle={[{height:SCREEN_HEIGHT}]}
+      showMarker
+      customMarker={
+        <View style={styles.rectangleContainer}>
+          <View style={styles.topOverlay}>
+            <Text style={{ fontSize: 15, color: "white",marginHorizontal:50,top:SCREEN_HEIGHT*0.084}}>
+                Place your camera at the QR code or upload QR Code from gallery to pay
+              </Text>
+          </View>
+          <View style={{flexDirection:"row"}}>  
+            <View style={styles.leftAndRightOverlay}/>
+            <View style={styles.rectangle}>
+              <FontAwesome name="scan-helper" style={styles.Octicon}/>
+              <Animatable.View
+                style={styles.scanBar}
+                direction='alternate-reverse'
+                iterationCount='infinite'
+                duration={1100}
+                easing='linear'
+                animation={makeSlideOutTranslation(
+                  "translateY", 
+                  SCREEN_WIDTH* -0.98
+                )}
+              />
+            </View>
+            <View style={styles.leftAndRightOverlay}/>
+          </View>
+          <View style={styles.bottomOverlay} />
+        </View>
+      }
       onRead={onSuccess}
       bottomContent={
         <View style={styles.bottomnav}>
-          <View style={styles.text}>
-            <Ion style={styles.BackIcon} name="chevron-back-outline"/>
-            <Text style={styles.transcation}>Scan for transcation</Text>
-            <Pressable onPress={()=>navigation.navigate('info')}><Ion style={styles.informationLogo} name="alert-circle-outline"/></Pressable>
-          </View>
-          <View style={styles.QRLogo}>
-            <Ion style={styles.Logo} name="qr-code-outline" size={40}/>
-          </View>
           <View style={styles.mainBottom}>
             <Pressable onPress={()=>setTorch(!torch)}>
               {torch === false ? 
@@ -63,8 +91,11 @@ const Scanner = ({navigation}) => {
             </Pressable>
             <Ion style={styles.gallery} name="images-outline"/>
           </View>
+          <View style={styles.QRLogo}>
+            <Text style={styles.partners}>Partners with</Text>
+          </View>
           <View style={styles.partner}>
-            <Image style={styles.qris} source={require('./asset/img/Qris.png')} />
+            <Image style={styles.qris} source={require('./asset/img/qris_white.png')} />
           </View>
         </View>
       }
@@ -72,7 +103,15 @@ const Scanner = ({navigation}) => {
     </View>
   )
 }
-
+  const rectBorderColor = "#c5ecfc";
+  const overlayColor = "rgba(0,0,0,0.7)";
+  const SCREEN_HEIGHT = Dimensions.get('window').height
+  const SCREEN_WIDTH = Dimensions.get('window').width
+  const scanBarHeight = SCREEN_WIDTH * 0.005;
+  const scanBarWidth = SCREEN_WIDTH * 0.8;
+  const rectBorderWidth = SCREEN_WIDTH * 0.004;
+  const rectDimensions = SCREEN_WIDTH * 0.8;
+  const scanBarColor = "#ffae17"; 
 const styles = StyleSheet.create({
   falsecontainer:{
     flex:1,
@@ -92,48 +131,8 @@ const styles = StyleSheet.create({
   bottomnav:{
     top:Dimensions.get('window').height,
     width:'100%',
-    height:370,
-    backgroundColor:'rgba(255,255,255,0.6)',
+    height:550,
     borderRadius:40,
-  },
-  text:{
-    position:'absolute',
-    width:'100%',
-    flexDirection:'row',
-    justifyContent:'center',
-  },
-  transcation:{
-    color:'#222831',
-    marginHorizontal:60,
-    fontSize:16,
-    alignContent:'center',
-    padding:10,
-    backgroundColor:'rgba(255,255,255,0.4)',
-    borderRadius:50,
-    fontWeight:'600',
-    bottom:(Dimensions.get('window').height) * 0.7
-  },
-  informationLogo:{
-    padding:5,
-    borderRadius:50,
-    backgroundColor:'rgba(255,255,255,0.4)',
-    bottom:(Dimensions.get('window').height) * 0.73,
-    fontSize:30,
-    textAlign:'center',
-    alignSelf:'center',
-    textAlign:'center',
-    alignSelf:'center',
-    color:'#222831',
-  },
-  BackIcon:{
-    padding:5,
-    borderRadius:50,
-    backgroundColor:'rgba(255,255,255,0.4)',
-    bottom:(Dimensions.get('window').height) * 0.73,
-    fontSize:30,
-    textAlign:'center',
-    alignSelf:'center',
-    color:'#222831',
   },
   QRLogo:{
     flexDirection:'row',
@@ -147,41 +146,97 @@ const styles = StyleSheet.create({
   },
   mainBottom:{
     flexDirection:'row',
-    justifyContent:'center'
+    justifyContent:'center',
+    marginBottom:30,
   },
   flashlogo:{
-    fontSize:40,
-    padding:10,
-    backgroundColor:'rgba(255,255,255,0.2)',
+    fontSize:35,
+    padding:12,
     marginHorizontal:15,
-    right: 50,
     borderRadius:50,
-    color:'#222831',
+    color:'white',
+    borderWidth:2,
+    borderColor:'white',
+    textAlign:'center'
   },
   gallery:{
-    fontSize:40,
-    padding:10,
-    backgroundColor:'rgba(217, 218, 219,0.7)',
+    fontSize:35,
+    padding:12,
     marginHorizontal:15,
-    left:50,
     borderRadius:50,
-    color:'#222831',
+    borderWidth:2,
+    borderColor:'white',
+    textAlign:'center',
+    color:'white',
   },
   qris:{
     width:60,
     height:20,
-    bottom:90,
     alignContent:'center',
-    alignSelf:'center'
+    alignSelf:'center',
+    marginBottom:30,
   },
   partner:{
     justifyContent:'center',
     alignContent:'center',
-    alignSelf:'center'
+    alignSelf:'center',
+    
   },
   modalContainer:{
     margin:80,
     color:'black'
+  },
+  partners:{
+    color:'white',
+    fontSize:15,
+    marginVertical:10,
+  },
+  rectangleContainer:{
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "transparent"
+  },
+  topOverlay: {
+    flex: 1,
+    height: SCREEN_WIDTH,
+    width: SCREEN_WIDTH,
+    backgroundColor: overlayColor,
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  leftAndRightOverlay: {
+    height: SCREEN_WIDTH * 0.8,
+    width: SCREEN_WIDTH,
+    backgroundColor: overlayColor
+  },
+  scanBar: {
+    top:228,
+    width: scanBarWidth,
+    height: scanBarHeight,
+    backgroundColor: scanBarColor
+  },
+  bottomOverlay: {
+    flex: 1,
+    height: SCREEN_WIDTH,
+    width: SCREEN_WIDTH,
+    backgroundColor: overlayColor,
+    paddingBottom: SCREEN_WIDTH * 0.25
+  },
+  rectangle: {
+    height: rectDimensions,
+    width: rectDimensions,
+    borderWidth: rectBorderWidth,
+    borderColor: rectBorderColor,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "transparent",
+    borderRadius:3,
+  },
+  Octicon:{
+    position:'absolute',
+    fontSize:300,
+    color:'white'
   }
 })
 
