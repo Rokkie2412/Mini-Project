@@ -8,6 +8,8 @@ import { launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import { showMessage } from 'react-native-flash-message';
 
 const EditContact = ({navigation,route}) => {
+
+    //mengambil data yang di passda dari screen Home
     let itemID = route.params.itemID
     let TempFirstName = route.params.firstName
     let TempLastname = route.params.lastName
@@ -25,15 +27,17 @@ const EditContact = ({navigation,route}) => {
     const [Age,setAge] = useState(StringAge)
     const [imageCamera,setImageCamera] = useState(TempPhoto)
     
+    //melakukan disptach ke redux yang berisi POST data ke API
     const contactEdit = () =>{
         dispatch(editContact(itemID,firstName,LastName,Age,imageCamera))
     }
 
+    //code untuk membuka camera
     const openCamera = () => {
         
         const option={
             mediaType : 'photo',
-            quality : 1
+            quality : 0.7
         }
         launchCamera(option,(res)=>{
             if(res.didCancel){
@@ -47,12 +51,12 @@ const EditContact = ({navigation,route}) => {
             }
         })
     }
-
+    //code untuk membuka gallery
     const openGallery = () => {
         
         const option={
             mediaType : 'photo',
-            quality : 1
+            quality : 0.7
         }
         launchImageLibrary(option,(res)=>{
             if(res.didCancel){
@@ -77,16 +81,16 @@ const EditContact = ({navigation,route}) => {
                 <Text style={styles.titleheader}>Edit contact</Text>
                 <Pressable
                 onPress={()=>{
-                    {if(disableButton === true){
+                    {if(firstName.length < 3 || LastName.length < 3 || Age === ""){
                         showMessage({
                         message:'Edit Failed',
-                        description: errorMessage ,
+                        description: errorMessage,
                         animationDuration:600,
                         floating:true,
                         type:'warning',
                         icon:'warning'
                         })
-                    }else if(disableButton === false){
+                    }else{
                         contactEdit()
                         navigation.navigate('Home')
                     }}
@@ -132,11 +136,9 @@ const EditContact = ({navigation,route}) => {
                         {if(newFirst.length < 3 ){
                             setError('First name and last name length atleast must have 3 character')
                             setErrorMessage('First name length atleast mush have 3 character')
-                            setDisableButton(true)
                         }else{
-                            setError('')
                             setErrorMessage('')
-                            setDisableButton(false)
+                            setError('')
                         }}
                     }}
                     placeholder="First Name"
@@ -149,11 +151,9 @@ const EditContact = ({navigation,route}) => {
                         {if(newLast.length < 3){
                             setError('First name and last name length atleast must have 3 character')
                             setErrorMessage('Last name length atleast mush have 3 character')
-                            setDisableButton(true)
                         }else{
-                            setError('')
                             setErrorMessage('')
-                            setDisableButton(false)
+                            setError('')
                         }}
                     }}
                     placeholder="Last Name"
@@ -170,9 +170,6 @@ const EditContact = ({navigation,route}) => {
                         setAge(newAge)
                         if(newAge === ''){
                             setErrorMessage('Age must not be empty')
-                            setDisableButton(true)
-                        }else{
-                            setDisableButton(false)
                         }
                     }}
                 />

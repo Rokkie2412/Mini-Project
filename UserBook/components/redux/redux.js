@@ -1,6 +1,7 @@
 export const ADD_CONTACT = 'ADD_CONTACT'
 export const SHOW_CONTACT = 'SHOW_CONTACT'
 export const EDITCONTACT = 'EDITCONTACT'
+export const PASSING = 'PASSING'
 
 const ApiUrl = 'https://simple-contact-crud.herokuapp.com/contact'
 
@@ -20,6 +21,11 @@ export const editContact = (itemId,firstName,lastName,age,image) => ({
     payloadLastName : lastName,
     payAge : age,
     payloadImage : image
+})
+
+export const PassToRedux = (ArrayPass) => ({
+    type:PASSING,
+    payload : ArrayPass,
 })
 
 let initialState = {
@@ -62,6 +68,11 @@ export const mainReducer = (state=initialState, action) => {
                  }).then(Response=>Response.json()).then(json=>console.log(json))
             }
             return(editContact())
+        case PASSING :
+            return{
+                ...state,arr:[action.payload,...state.arr]
+            }
+
         default:
             return state
     }

@@ -14,10 +14,16 @@ const Home = ({navigation}) => {
     let dataArray = useSelector(state=>state.arr)
     dataArray = Filterresult
     
-    const IntervalCheck = () => {
+    const intervalSet = () => {
         setInterval(()=>{
         checkInternet()
-    },7000)
+        clearInterval(10000)
+    },10000)
+    }
+
+    const IntervalCheck = () => {
+        const interval = intervalSet()
+        return clearInterval(interval)
     }
 
     useEffect(()=>{
@@ -105,7 +111,7 @@ const Home = ({navigation}) => {
             <View style={styles.flatlistView}>
                 <FlatList
                     showsVerticalScrollIndicator={false}
-                    data={dataArray}
+                    data={dataArray.sort((a,b)=>a.firstName.localeCompare(b.firstName))}
                     keyExtractor={({id},index)=>id}
                     renderItem={({item})=>{
                         return(

@@ -9,21 +9,21 @@ import { launchCamera, launchImageLibrary} from 'react-native-image-picker';
 
 
 const AddContacts = ({navigation}) => {
+    const [errorMessage,setErrorMessage] = useState('')
     const [Error,setError] = useState('')
-    const [disableButton,setDisableButton] = useState(true)
     const [firstName,setFirstName] = useState('')
     const [LastName,setLastName] = useState('')
     const [Age,setAge] = useState('')
     const [imageCamera,setImageCamera] = useState('N/A')
     const dispatch = useDispatch()
 
-    const requestPermission = () =>{
+    //permission untuk mendapat akses kamera pada Android
+    const requestPermission = async() =>{
         try {
             const granted = await PermissionsAndroid.request(
                 PermissionsAndroid.PERMISSIONS.CAMERA,{
                     title: "App Camera Permission",
-                    message:
-                    "We need your permission to take photo for contact photo ",
+                    message: "We need your permission to take photo for contact photo ",
                     buttonNeutral: "Ask Me Later",
                     buttonNegative: "Cancel",
                     buttonPositive: "OK"
@@ -38,11 +38,12 @@ const AddContacts = ({navigation}) => {
             console.warn(error)
         }
     }
-
+    //melakukan dispatch untuk menambahkan item ke API , code dari redux
     const addItem = () => {
         dispatch(addContact(firstName,LastName,Age,imageCamera))
     }
 
+    //code untuk membuka kamera
     const openCamera = () => {
         
         const option={
@@ -62,11 +63,12 @@ const AddContacts = ({navigation}) => {
         })
     }
 
+    //code untuk membuka kamera
     const openGallery = () => {
         
         const option={
             mediaType : 'photo',
-            quality : 1
+            quality : 0.7
         }
         launchImageLibrary(option,(res)=>{
             if(res.didCancel){
@@ -91,16 +93,17 @@ const AddContacts = ({navigation}) => {
                 <Text style={styles.titleheader}>Save to contact</Text>
                 <Pressable
                 onPress={()=>{
-                    {if(disableButton === true){
+                    //code validasi untuk addContact ke API
+                    {if(firstName.length < 3 || LastName.length < 3 || Age === ""){
                         showMessage({
                         message:'Edit Failed',
-                        description:'Name must have atleast 3 character',
+                        description: errorMessage,
                         animationDuration:600,
                         floating:true,
                         type:'warning',
                         icon:'warning'
                         })
-                    }else if(disableButton === false){
+                    }else{
                         addItem()
                         navigation.navigate('Home')
                     }}
@@ -121,12 +124,17 @@ const AddContacts = ({navigation}) => {
                             },
                             {
                                 text:'Camera',
-                                onPress: ()=>openCamera(),
+                                onPress: ()=>{
+                                    requestPermission()
+                                    openCamera()
+                                },
                             },
                             {
                                 text:'Gallery',
-                                onPress: ()=>openGallery(),
-                                styles:'cancel'
+                                onPress: ()=>{
+                                    
+                                    openGallery()
+                                }
                             }
                         ]
                     )
@@ -145,10 +153,11 @@ const AddContacts = ({navigation}) => {
                         setFirstName(newFirst)
                         {if(newFirst.length < 3){
                             setError('First name and last name length atleast must have 3 character')
-                            setDisableButton(true)
+                            setErrorMessage('First name length atleast mush have 3 character')
+                           
                         }else{
-                            setError('')
-                            setDisableButton(false)
+                            setErrorMessage('')
+                            setError('') 
                         }}
                     }}
                     placeholder="First Name"
@@ -160,10 +169,11 @@ const AddContacts = ({navigation}) => {
                         setLastName(newLast)
                         {if(newLast.length < 3){
                             setError('First name and last name length atleast must have 3 character')
-                            setDisableButton(true)
+                            setErrorMessage('Last name length atleast mush have 3 character')
+                            
                         }else{
-                            setError('')
-                            setDisableButton(false)
+                            setErrorMessage('')
+                            setError('') 
                         }}
                     }}
                     placeholder="Last Name"
@@ -180,10 +190,7 @@ const AddContacts = ({navigation}) => {
                         setAge(newAge)
                         if(newAge === ''){
                             setErrorMessage('Age must not be empty')
-                            setDisableButton(true)
-                        }else{
-                            setDisableButton(false)
-                        }
+                    }
                     }}
                 />
             </View>
