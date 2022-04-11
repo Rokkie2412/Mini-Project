@@ -105,13 +105,13 @@ const Home = ({navigation}) => {
             </View>
 
             <View>
-                <SearchBar search={search} setSearch={(text)=>FilterSearch(text)}/>
+                <SearchBar clear={()=>FilterSearch('')} search={search} setSearch={(text)=>FilterSearch(text)}/>
             </View>
             
             <View style={styles.flatlistView}>
                 <FlatList
                     showsVerticalScrollIndicator={false}
-                    data={dataArray.sort((a,b)=>a.firstName.localeCompare(b.firstName))}
+                    data={Filterresult.sort((a,b)=>a.firstName.localeCompare(b.firstName))}
                     keyExtractor={({id},index)=>id}
                     renderItem={({item})=>{
                         return(

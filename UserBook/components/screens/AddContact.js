@@ -6,7 +6,7 @@ import Feather from 'react-native-vector-icons/Feather'
 import { useDispatch } from "react-redux";
 import { addContact } from '../redux/redux'
 import { launchCamera, launchImageLibrary} from 'react-native-image-picker';
-
+import { Sae, Akira } from 'react-native-textinput-effects'
 
 const AddContacts = ({navigation}) => {
     const [errorMessage,setErrorMessage] = useState('')
@@ -146,8 +146,18 @@ const AddContacts = ({navigation}) => {
                 </Pressable>
             </View>
             <View style={styles.InputContainer}>
-                <TextInput
-                    style={styles.Firstname}
+            <Sae    
+                    labelStyle={{color:'#2C3333'}}
+                    inputStyle={{color:'#2C3333'}}
+                    label='First Name'
+                    iconClass={Ion}
+                    iconName={'pencil'}
+                    iconColor='#2C3333'
+                    inputPadding={16}
+                    labelHeight={24}
+                    borderHeight={2}
+                    utoCapitalize={'none'}
+                    autoCorrect={false}
                     value={firstName}
                     onChangeText={(newFirst)=>{
                         setFirstName(newFirst)
@@ -160,10 +170,20 @@ const AddContacts = ({navigation}) => {
                             setError('') 
                         }}
                     }}
-                    placeholder="First Name"
-                />
-                <TextInput
                     style={styles.Lastname}
+                />
+                <Sae
+                    labelStyle={{color:'#2C3333'}}
+                    inputStyle={{color:'#2C3333'}}
+                    label='Last Name'
+                    iconClass={Ion}
+                    iconName={'pencil'}
+                    iconColor='#2C3333'
+                    inputPadding={16}
+                    labelHeight={24}
+                    borderHeight={2}
+                    utoCapitalize={'none'}
+                    autoCorrect={false}
                     value={LastName}
                     onChangeText={(newLast)=>{
                         setLastName(newLast)
@@ -176,15 +196,16 @@ const AddContacts = ({navigation}) => {
                             setError('') 
                         }}
                     }}
-                    placeholder="Last Name"
+                    style={styles.Lastname}
                 />
                 <Text style={{marginHorizontal:32,fontSize:11,color:'black',marginVertical
                 :7,}}>{Error}</Text>
-                <Text style={{margin:12,fontWeight:'600',textAlign:'center',fontSize:16}}>Age :</Text>
-                <TextInput
-                keyboardType='numeric'
-                    placeholder='Age'
-                    style={styles.age}
+                <Akira
+                    keyboardType='numeric'
+                    label='Age'
+                    labelStyle={{color:'#2C3333',bottom:3}}
+                    borderColor='#2C3333'
+                    labelHeight={30}
                     value={Age}
                     onChangeText={(newAge)=>{
                         setAge(newAge)
@@ -192,6 +213,7 @@ const AddContacts = ({navigation}) => {
                             setErrorMessage('Age must not be empty')
                     }
                     }}
+                    style={styles.age}
                 />
             </View>
         </View>
@@ -251,16 +273,13 @@ const styles = StyleSheet.create({
         paddingLeft:20,
     },
     Lastname:{
-        backgroundColor:'#EFEFEE',
-        borderRadius:50,
+        color:'#2C3333',
         marginTop:8,
-        marginHorizontal:12,
+        marginHorizontal:35,
         fontWeight:'bold',
         paddingLeft:20,
     },
     age:{
-        backgroundColor:'#EFEFEE',
-        borderRadius:50,
         marginTop:8,
         marginHorizontal:12,
         fontWeight:'bold',
