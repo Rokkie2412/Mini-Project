@@ -1,14 +1,14 @@
 import React,{useState} from 'react'
-import {Text,TextInput,Pressable,View,StyleSheet,Image,Alert,PermissionsAndroid} from 'react-native'
+import {Text,Pressable,View,StyleSheet,Image,Alert,PermissionsAndroid,TextInput} from 'react-native'
 import { showMessage } from 'react-native-flash-message'
 import Ion from 'react-native-vector-icons/Ionicons'
-import Feather from 'react-native-vector-icons/Feather'
 import { useDispatch } from "react-redux";
 import { addContact } from '../redux/redux'
 import { launchCamera, launchImageLibrary} from 'react-native-image-picker';
-import { Sae, Akira } from 'react-native-textinput-effects'
+// import { Akira } from 'react-native-textinput-effects'
+// import { Sae } from 'react-native-textinput-effects'
 
-const AddContacts = ({navigation}) => {
+ const AddContacts = ({navigation}) => {
     const [errorMessage,setErrorMessage] = useState('')
     const [Error,setError] = useState('')
     const [firstName,setFirstName] = useState('')
@@ -17,7 +17,7 @@ const AddContacts = ({navigation}) => {
     const [imageCamera,setImageCamera] = useState('N/A')
     const dispatch = useDispatch()
 
-    //permission untuk mendapat akses kamera pada Android
+    //permission untuk mendapat akses kamera pada Android   
     const requestPermission = async() =>{
         try {
             const granted = await PermissionsAndroid.request(
@@ -38,6 +38,7 @@ const AddContacts = ({navigation}) => {
             console.warn(error)
         }
     }
+
     //melakukan dispatch untuk menambahkan item ke API , code dari redux
     const addItem = () => {
         dispatch(addContact(firstName,LastName,Age,imageCamera))
@@ -82,19 +83,13 @@ const AddContacts = ({navigation}) => {
             }
         })
     }
-    
+    module.exports={
+        Gallery : openGallery,
+        Camera : openCamera
+    }
 
-    return(
-        <View style={styles.mainContainer}>
-            <View style={styles.header}>
-                <Pressable onPress={()=>navigation.goBack()}>
-                    <Feather style={styles.backIcon} name='x'/>
-                </Pressable>
-                <Text style={styles.titleheader}>Save to contact</Text>
-                <Pressable
-                onPress={()=>{
-                    //code validasi untuk addContact ke API
-                    {if(firstName.length < 3 || LastName.length < 3 || Age === ""){
+    const checkingValidate = () =>{
+        if(firstName.length < 3 || LastName.length < 3 || Age === ""){
                         showMessage({
                         message:'Edit Failed',
                         description: errorMessage,
@@ -106,7 +101,21 @@ const AddContacts = ({navigation}) => {
                     }else{
                         addItem()
                         navigation.navigate('Home')
-                    }}
+                    }
+    }
+
+    return(
+        <View style={styles.mainContainer}>
+            <View style={styles.header}>
+                <Pressable testID='backButton' onPress={()=>navigation.navigate('Home')}>
+                    <Ion style={styles.backIcon} name='chevron-back-outline'/>
+                </Pressable>
+                <Text style={styles.titleheader}>Save to contact</Text>
+                <Pressable
+                testID='submitButton'
+                onPress={()=>{
+                    //code validasi untuk addContact ke API
+                    checkingValidate()
                 }}
                 >
                     <Ion style={styles.completeIcon} name='checkmark-sharp'/>
@@ -146,7 +155,7 @@ const AddContacts = ({navigation}) => {
                 </Pressable>
             </View>
             <View style={styles.InputContainer}>
-            <Sae    
+            {/* <Sae    
                     labelStyle={{color:'#2C3333'}}
                     inputStyle={{color:'#2C3333'}}
                     label='First Name'
@@ -156,7 +165,7 @@ const AddContacts = ({navigation}) => {
                     inputPadding={16}
                     labelHeight={24}
                     borderHeight={2}
-                    utoCapitalize={'none'}
+                    autoCapitalize={'none'}
                     autoCorrect={false}
                     value={firstName}
                     onChangeText={(newFirst)=>{
@@ -182,7 +191,7 @@ const AddContacts = ({navigation}) => {
                     inputPadding={16}
                     labelHeight={24}
                     borderHeight={2}
-                    utoCapitalize={'none'}
+                    autoCapitalize={'none'}
                     autoCorrect={false}
                     value={LastName}
                     onChangeText={(newLast)=>{
@@ -197,10 +206,46 @@ const AddContacts = ({navigation}) => {
                         }}
                     }}
                     style={styles.Lastname}
+                /> */}
+                <TextInput
+                    value={firstName}
+                    onChangeText={(newFirst)=>{
+                        setFirstName(newFirst)
+                        {if(newFirst.length < 3){
+                            setError('First name and last name length atleast must have 3 character')
+                            setErrorMessage('Last name length atleast mush have 3 character')
+                            
+                        }else{
+                            setErrorMessage('')
+                            setError('') 
+                        }}
+                    }}
+                    placeholder='Input Last Name'
+                    autoCapitalize={'none'}
+                    autoCorrect={false}
+                    style={styles.Lastname}
                 />
-                <Text style={{marginHorizontal:32,fontSize:11,color:'black',marginVertical
+                <TextInput
+                    value={LastName}
+                    onChangeText={(newLast)=>{
+                        setLastName(newLast)
+                        {if(newLast.length < 3){
+                            setError('First name and last name length atleast must have 3 character')
+                            setErrorMessage('Last name length atleast mush have 3 character')
+                            
+                        }else{
+                            setErrorMessage('')
+                            setError('') 
+                        }}
+                    }}
+                    placeholder='Input Last Name'
+                    autoCapitalize={'none'}
+                    autoCorrect={false}
+                    style={styles.Lastname}
+                />
+                <Text testID='textalert' style={{marginHorizontal:32,fontSize:11,color:'black',marginVertical
                 :7,}}>{Error}</Text>
-                <Akira
+                {/* <Akira
                     keyboardType='numeric'
                     label='Age'
                     labelStyle={{color:'#2C3333',bottom:3}}
@@ -214,6 +259,18 @@ const AddContacts = ({navigation}) => {
                     }
                     }}
                     style={styles.age}
+                /> */}
+                <TextInput
+                    value={Age}
+                    onChangeText={(newAge)=>{
+                        setAge(newAge)
+                        if(newAge === ''){
+                            setErrorMessage('Age must not be empty')
+                    }
+                    }}
+                    style={styles.age}
+                    placeholder='Age?'
+                    keyboardType = 'numeric'
                 />
             </View>
         </View>
@@ -278,6 +335,8 @@ const styles = StyleSheet.create({
         marginHorizontal:35,
         fontWeight:'bold',
         paddingLeft:20,
+        borderBottomWidth:1,
+        borderColor:'#333',
     },
     age:{
         marginTop:8,
@@ -285,7 +344,9 @@ const styles = StyleSheet.create({
         fontWeight:'bold',
         width:100,
         alignSelf:'center',
-        textAlign:'center'
+        textAlign:'center',
+        borderBottomWidth:1,
+        borderColor:'#333',
     },
     imagePhoto:{
         height:90,

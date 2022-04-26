@@ -13,27 +13,6 @@ const Home = ({navigation}) => {
     const [Filterresult,setFilterResult] = useState([])
     let dataArray = useSelector(state=>state.arr)
     dataArray = Filterresult
-    
-    const intervalSet = () => {
-        setInterval(()=>{
-        checkInternet()
-        clearInterval(10000)
-    },10000)
-    }
-
-    const IntervalCheck = () => {
-        const interval = intervalSet()
-        return clearInterval(interval)
-    }
-
-    useEffect(()=>{
-        getData()
-        checkInternet()
-        const unsubscribe = navigation.addListener('focus',()=>{
-            getData()
-        })
-        return unsubscribe
-    },[navigation])
 
     const getData = () => {
         fetch('https://simple-contact-crud.herokuapp.com/contact')
@@ -56,8 +35,31 @@ const Home = ({navigation}) => {
                 }
             })
         })
+        return result
+    }
+    
+    const intervalSet = () => {
+        setInterval(()=>{
+        checkInternet()
+        clearInterval(10000)
+    },10000)
     }
 
+    const IntervalCheck = () => {
+        const interval = intervalSet()
+        return (interval)
+    }
+
+    useEffect(()=>{
+        getData(setResult,setFilterResult)
+        checkInternet()
+        const unsubscribe = navigation.addListener('focus',()=>{
+            getData(setResult,setFilterResult)
+        })
+        return unsubscribe
+    },[navigation])
+
+    
 
     const checkInternet = () =>{
         NetInfo.fetch('https://simple-contact-crud.herokuapp.com/contact').then(networkState=>{
@@ -77,7 +79,6 @@ const Home = ({navigation}) => {
                 })
             }
         })
-        
     }
 
     const FilterSearch = (text) => {
@@ -93,7 +94,14 @@ const Home = ({navigation}) => {
             setFilterResult(result)
             setSearch(text)
         }
-        
+        return text
+    }
+
+    module.exports={
+        interval : intervalSet,
+        check : IntervalCheck,
+        data : getData,
+        filter : FilterSearch
     }
 
     IntervalCheck()
@@ -117,7 +125,7 @@ const Home = ({navigation}) => {
                         return(
                             <View style={styles.flatcontainer}>
                                 
-                                    <TouchableOpacity onPress={()=>{
+                                    <TouchableOpacity testID='EditButton' onPress={()=>{
                                         navigation.navigate('EditContact',
                                             {itemID : item.id,
                                             firstName: item.firstName,
@@ -132,15 +140,17 @@ const Home = ({navigation}) => {
                                         <Text style={styles.contactName}>{item.firstName} {item.lastName}</Text>
                                     </View>
                                     </TouchableOpacity>
-                                
                             </View>
                         )
                     }}
                 />
             </View>
             <View style={styles.buttonContainer}>
-                <Pressable style={{alignItems:'flex-end'}} 
-                onPress={()=>navigation.navigate('AddContact')}
+                <Pressable testID='myButton' style={{alignItems:'flex-end'}} 
+                onPress={()=>{
+                    console.log(dataArray)
+                    navigation.navigate('AddContact')
+                }}
                 >
                     <Ion name='add' style={styles.addButton}/>
                 </Pressable>

@@ -6,18 +6,17 @@ import { useDispatch } from "react-redux";
 import { editContact } from '../redux/redux';
 import { launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import { showMessage } from 'react-native-flash-message';
-import { Sae, Akira } from 'react-native-textinput-effects'
+// import { Sae, Akira } from 'react-native-textinput-effects'
 const EditContact = ({navigation,route}) => {
 
-    //mengambil data yang di passda dari screen Home
+    //mengambil data yang di passd dari screen Home
     let itemID = route.params.itemID
     let TempFirstName = route.params.firstName
     let TempLastname = route.params.lastName
     let TempAge = route.params.age
-    let StringAge = TempAge.toString()
+    let StringAge = "" + TempAge
     let TempPhoto = route.params.photo
     const [Error,setError] = useState('')
-    const [disableButton,setDisableButton] = useState(true)
     const [errorMessage,setErrorMessage] = useState('')
 
     // console.log(itemID, TempFirstName,TempLastname,TempAge,TempPhoto)
@@ -71,17 +70,8 @@ const EditContact = ({navigation,route}) => {
         })
     }
 
-    
-    return(
-        <View style={styles.mainContainer}>
-            <View style={styles.header}>
-                <Pressable onPress={()=>navigation.goBack()}>
-                    <Feather style={styles.backIcon} name='x'/>
-                </Pressable>
-                <Text style={styles.titleheader}>Edit contact</Text>
-                <Pressable
-                onPress={()=>{
-                    {if(firstName.length < 3 || LastName.length < 3 || Age === ""){
+    const checkValidate = () =>{
+        if(firstName.length < 3 || LastName.length < 3 || Age === ""){
                         showMessage({
                         message:'Edit Failed',
                         description: errorMessage,
@@ -93,7 +83,23 @@ const EditContact = ({navigation,route}) => {
                     }else{
                         contactEdit()
                         navigation.navigate('Home')
-                    }}
+                    }
+    }
+
+    
+    return(
+        <View style={styles.mainContainer}>
+            <View style={styles.header}>
+                <Pressable testID='backButton' onPress={()=>{
+                    navigation.navigate('Home')
+                }}>
+                    <Feather style={styles.backIcon} name='x'/>
+                </Pressable>
+                <Text style={styles.titleheader}>Edit contact</Text>
+                <Pressable
+                testID='submitButton'
+                onPress={()=>{
+                    checkValidate()
                 }}
                 >
                     <Ion style={styles.completeIcon} name='checkmark-sharp'/>
@@ -128,7 +134,7 @@ const EditContact = ({navigation,route}) => {
                 </Pressable>
             </View>
             <View style={styles.InputContainer}>
-            <Sae    
+            {/* <Sae    
                     labelStyle={{color:'#2C3333'}}
                     inputStyle={{color:'#2C3333'}}
                     label='First Name'
@@ -179,10 +185,46 @@ const EditContact = ({navigation,route}) => {
                         }}
                     }}
                     style={styles.Lastname}
+                /> */}
+               <TextInput
+                    value={firstName}
+                    onChangeText={(newFirst)=>{
+                        setFirstName(newFirst)
+                        {if(newFirst.length < 3){
+                            setError('First name and last name length atleast must have 3 character')
+                            setErrorMessage('Last name length atleast mush have 3 character')
+                            
+                        }else{
+                            setErrorMessage('')
+                            setError('') 
+                        }}
+                    }}
+                    placeholder='Input Last Name'
+                    autoCapitalize={'none'}
+                    autoCorrect={false}
+                    style={styles.Lastname}
+                />
+                <TextInput
+                    value={LastName}
+                    onChangeText={(newLast)=>{
+                        setLastName(newLast)
+                        {if(newLast.length < 3){
+                            setError('First name and last name length atleast must have 3 character')
+                            setErrorMessage('Last name length atleast mush have 3 character')
+                            
+                        }else{
+                            setErrorMessage('')
+                            setError('') 
+                        }}
+                    }}
+                    placeholder='Input Last Name'
+                    autoCapitalize={'none'}
+                    autoCorrect={false}
+                    style={styles.Lastname}
                 />
                 <Text style={{marginHorizontal:32,fontSize:11,color:'black',marginVertical
                 :7,}}>{Error}</Text>
-                <Akira
+                {/* <Akira
                     keyboardType='numeric'
                     label='Age'
                     labelStyle={{color:'#2C3333',bottom:3}}
@@ -196,6 +238,18 @@ const EditContact = ({navigation,route}) => {
                     }
                     }}
                     style={styles.age}
+                /> */}
+                <TextInput
+                    value={Age}
+                    onChangeText={(newAge)=>{
+                        setAge(newAge)
+                        if(newAge === ''){
+                            setErrorMessage('Age must not be empty')
+                    }
+                    }}
+                    style={styles.age}
+                    placeholder='Age?'
+                    keyboardType = 'numeric'
                 />
             </View>
         </View>
@@ -246,7 +300,7 @@ const styles = StyleSheet.create({
     InputContainer:{
         flex:1
     },
-    Firstname:{
+Firstname:{
         backgroundColor:'#EFEFEE',
         borderRadius:50,
         marginTop:15,
@@ -254,12 +308,14 @@ const styles = StyleSheet.create({
         fontWeight:'bold',
         paddingLeft:20,
     },
-    Lastname:{
+Lastname:{
         color:'#2C3333',
         marginTop:8,
         marginHorizontal:35,
         fontWeight:'bold',
         paddingLeft:20,
+        borderBottomWidth:1,
+        borderColor:'#333',
     },
     age:{
         marginTop:8,
@@ -267,7 +323,9 @@ const styles = StyleSheet.create({
         fontWeight:'bold',
         width:100,
         alignSelf:'center',
-        textAlign:'center'
+        textAlign:'center',
+        borderBottomWidth:1,
+        borderColor:'#333',
     },
     imagePhoto:{
         height:90,

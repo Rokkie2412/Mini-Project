@@ -1,11 +1,13 @@
 import React from 'react'
 import {StyleSheet,TextInput,View} from 'react-native'
-import Search from 'react-native-vector-icons/Ionicons'
 
+;
+import SearchBar from "react-native-dynamic-search-bar";
 const SearchBarComponent = ({search,setSearch,searchSubmit,clear}) => {
+    
     return(
         <View style={styles.searchContainer}>
-            <Search style={styles.magnifyingGlass} name='search' size={28}/>
+            {/* <Search style={styles.magnifyingGlass} name='search' size={28}/>
             <TextInput
                 autoCapitalize='none'
                 autoCorrect={false}
@@ -14,8 +16,8 @@ const SearchBarComponent = ({search,setSearch,searchSubmit,clear}) => {
                 onChangeText={setSearch}
                 style={{flex:1,fontSize:17}}
                 onEndEditing={searchSubmit}
-            />
-            {/* <SearchBar
+            /> */}
+            <SearchBar
                 style={{backgroundColor:'#F0EEEE',height:55,justifyContent:'center'}}
                 height={50}
                 fontSize={18}
@@ -26,7 +28,7 @@ const SearchBarComponent = ({search,setSearch,searchSubmit,clear}) => {
                 value={search}
                 onChangeText={setSearch}
                 onEndEditing={searchSubmit}
-            /> */}
+            />
         </View>
     )
 }
@@ -38,10 +40,7 @@ const styles = StyleSheet.create({
         borderRadius:10,
         marginVertical:10,
         // marginHorizontal:2,
-        flexDirection:'row',
-        backgroundColor:'lightgrey',
-        marginHorizontal:20,
-        borderRadius:60,
+        flexDirection:'row'
     },
     magnifyingGlass:{
         alignSelf:'center',

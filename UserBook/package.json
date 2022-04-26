@@ -6,7 +6,7 @@
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "start": "react-native start",
-    "test": "jest",
+    "test": "jest -u",
     "lint": "eslint ."
   },
   "dependencies": {
@@ -14,7 +14,10 @@
     "@react-native-community/netinfo": "^8.2.0",
     "@react-navigation/native": "^6.0.8",
     "@react-navigation/native-stack": "^6.5.2",
+    "@types/jest": "^27.4.1",
     "axios": "^0.26.1",
+    "jest-fetch-mock": "^3.0.3",
+    "node-fetch": "^3.2.3",
     "react": "17.0.2",
     "react-native": "0.67.4",
     "react-native-alert-notification": "^0.1.13",
@@ -46,6 +49,17 @@
     "react-test-renderer": "17.0.2"
   },
   "jest": {
-    "preset": "react-native"
+    "preset": "react-native",
+    "resetMocks": false,
+    "automock": false,
+    "setupFiles": [
+      "<rootDir>/JestSetup.js"
+    ],
+    "transformIgnorePatterns": [
+      "node_modules/(?!(@react-native|react-native|react-native-vector-icons)/)",
+      "node_modules/(?!(@react-native|react-native|react-native-flash-message)/)",
+      "node_modules/(?!(@react-native|react-native|react-native-device-info)/)",
+      "node_modules/(?!(jest-)?@react-native|react-native|react-native-flash-message/*)"
+    ]
   }
 }
