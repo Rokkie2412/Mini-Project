@@ -36,23 +36,7 @@ const tree = create(
     </Provider>
 )
 
-
-test('navigation to Home',()=>{
-    const button = tree.root.findByProps({testID:'backButton'}).props
-    button.onPress()
-    expect(navigation.navigate).toBeCalledWith('Home')
+test('Snap test Home pages',()=>{
+    expect(tree).toMatchSnapshot()
 })
 
-// test('navigation to Home',()=>{
-//     const button = tree.root.findByProps({testID:'submitButton'}).props
-//     act(()=>button.onPress())
-//     const text = tree.root.findByProps({testID:'textalert'}).props
-//     expect(text.children).not.toBeNull
-// })
-
-// test('navigation to Home',()=>{
-//     const button = tree.root.findByProps({testID:'submitButton'}).props
-//     button.onPress()
-//     expect(showMessage).toBeFalsy()
-//     expect(navigation.navigate).toBeCalledWith('Home')
-// })

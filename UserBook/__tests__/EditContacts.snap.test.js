@@ -47,16 +47,22 @@ const tree = create(
         </Provider>
         )
 
+describe('Testing Edit Contact snaps',()=>{
+    test('render corretly',()=>{
+        mockedparams
+        tree
+        expect(tree).toMatchSnapshot();
+    })
+})
+
 test('navigation to Home',()=>{
     const button = tree.root.findByProps({testID:'backButton'}).props
     button.onPress()
     expect(navigation.navigate).toBeCalledWith('Home')
 })
 
-// test('Testing state change',()=>{
-//     const textfirstname = tree.root.findByProps({testID:'firstname'}).props
-//     act(()=> textfirstname.onChangeText())
-//     const errortext = tree.root.findByProps({testID:'error'}).props
-//     expect(errortext.children).toEqual('First name and last name length atleast must have 3 character')
+// test('navigation to Home',()=>{
+//     const button = tree.root.findByProps({testID:'submitButton'}).props
+//     button.onPress()
+//     expect(navigation.navigate).toBeCalledWith('Home')
 // })
-

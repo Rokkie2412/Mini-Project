@@ -86,6 +86,16 @@ const EditContact = ({navigation,route}) => {
                     }
     }
 
+    const vaidatename = (newFirst) =>{
+        if(newFirst.length < 3){
+                            setError('First name and last name length atleast must have 3 character')
+                            setErrorMessage('Last name length atleast mush have 3 character')
+                            
+                        }else{
+                            setErrorMessage('')
+                            setError('') 
+                        }
+    }
     
     return(
         <View style={styles.mainContainer}>
@@ -187,6 +197,7 @@ const EditContact = ({navigation,route}) => {
                     style={styles.Lastname}
                 /> */}
                <TextInput
+                    testID='firstname'
                     value={firstName}
                     onChangeText={(newFirst)=>{
                         setFirstName(newFirst)
@@ -222,7 +233,7 @@ const EditContact = ({navigation,route}) => {
                     autoCorrect={false}
                     style={styles.Lastname}
                 />
-                <Text style={{marginHorizontal:32,fontSize:11,color:'black',marginVertical
+                <Text testID='error' style={{marginHorizontal:32,fontSize:11,color:'black',marginVertical
                 :7,}}>{Error}</Text>
                 {/* <Akira
                     keyboardType='numeric'
