@@ -1,0 +1,39 @@
+import { StyleSheet } from 'react-native';
+
+export default StyleSheet.create({
+    mainContainer:{
+        flex:1,
+        backgroundColor:'#333',
+        justifyContent:'center'
+    },
+    time:{
+        textAlign:'center',
+        color:'white',
+        fontSize:25,
+        fontWeight:'bold'
+    },
+    buttonContainer:{
+        flexDirection:'row',
+        justifyContent:'center'
+    },
+    button:{
+        color:'black',
+        fontSize:24,
+        padding:12,
+        backgroundColor:'white',
+        borderRadius:40,
+        marginVertical:10,
+    },
+    inputsection:{
+        flexDirection:'row',
+        justifyContent:'center',
+        marginVertical:20,
+    },
+    input:{
+        fontSize:20,
+        color:'white',
+        borderBottomColor:'white',
+        borderBottomWidth:1,
+        textAlign:'center'
+    }
+})
