@@ -7,7 +7,10 @@ export default StyleSheet.create({
         margin:'auto',
         marginVertical:'25%',
         marginHorizontal:'5%',
-        borderRadius:30
+        borderRadius:30,
+        position:'absolute',
+        width:'90%',
+        height:'70%',
     },
     headerSection:{
         flexDirection:'row',
@@ -33,6 +36,7 @@ export default StyleSheet.create({
         borderBottomWidth:2,
         marginHorizontal:8,
         padding:10,
+        color:'#EEEEEE',
     },
     set:{
         color:'#EEEEEE',

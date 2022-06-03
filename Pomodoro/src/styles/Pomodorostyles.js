@@ -17,14 +17,26 @@ export default StyleSheet.create({
         flex:1,
         justifyContent:'center'
     },
+    timeSection:{
+        backgroundColor:'#00ADB5',
+        marginHorizontal:15,
+        borderRadius:30,
+        paddingVertical:40,
+        
+    },
+    showsection:{
+        textAlign:'center',
+        marginTop:20,
+        fontSize:30,
+        color:'#393E46',
+        fontWeight:'bold'
+    },
     time:{
         textAlign:'center',
-        padding:10,
-        backgroundColor:'#00ADB5',
         color:'#EEEEEE',
-        fontSize:65,
+        fontSize:64,
         fontWeight:'bold',
-        paddingVertical:100,
+        paddingVertical:60,
         marginHorizontal:'5%',
         borderRadius:30,
     },

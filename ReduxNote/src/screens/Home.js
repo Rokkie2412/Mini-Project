@@ -6,7 +6,7 @@ const Home = ({navigation}) => {
     const [modal,setModal] = useState(false)
     const [TitleModal,setTitleModal] = useState('')
     const [BodyModal, setBodyModal] = useState('')
-    const data = useSelector(state=>state.arr)
+    const datasets = useSelector((state) => state.resultWorkinSecond)
     const dispatch = useDispatch()
     let object={}
     let tempTitleModal = ''
