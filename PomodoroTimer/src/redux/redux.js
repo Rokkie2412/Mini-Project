@@ -1,57 +1,59 @@
-export const EXCHAHNGETOSECOND = 'EXCHANGETOSECOND'
-export const EXCHAHNGETOSECONDBREAK = 'EXCHANGETOSECONDBREAK'
-export const EXCHAHNGETOSECONDLONGBREAK = 'EXCHANGETOSECONDLONGBREAK'
-export const GETDATA = 'GETDATA'
 
-export const exchangetosecwork = (hour,minute,second) =>({
-    type:EXCHAHNGETOSECOND,
+/**
+ * @format
+ * @flow
+ */
+export const EXCHAHNGETOSECONDS : string = 'EXCHANGETOSECOND'
+export const EXCHAHNGETOSECONDBREAK :string = 'EXCHANGETOSECONDBREAK'
+export const EXCHAHNGETOSECONDLONGBREAK :string = 'EXCHANGETOSECONDLONGBREAK'
+export const GETDATA:string = 'GETDATA'
+
+export const exchangetosecwork = (hour:string,minute:string,second:string):Object =>({
+    type:EXCHAHNGETOSECONDS,
     payloadhourwork : hour,
     payloadminutework : minute,
     payloadsecondwork : second
 })
 
-export const exchangetosecBreak = (minute,second) =>({
+export const exchangetosecBreak = (minute:string,second:string):Object =>({
     type:EXCHAHNGETOSECONDBREAK,
     payloadminutebreak : minute,
     payloadsecondbreak : second
 })
 
-export const exchangetosecLongBreak = (minute,second) =>({
+export const exchangetosecLongBreak = (minute:string,second:string):Object =>({
     type:EXCHAHNGETOSECONDLONGBREAK,
     payloadminutelongbreak : minute,
     payloadsecondlongbreak : second
 })
 
-let initialState ={
+let initialState : Object  ={
     resultWorkinSecond : 0,
     resultBreakinSecond : 0,
     resultLongBreakinSecond : 0
 }
 
-export const mainReducer = (state=initialState, action) =>{
+export const mainReducer = (state:Object=initialState, action:function):Function =>{
     switch (action.type) {
-        case EXCHAHNGETOSECOND:
+        case EXCHAHNGETOSECONDS:
             
-            const hourTosecond = action.payloadhourwork * 3600
-            const minuteTosecond = action.payloadminutework * 60
-            const res = hourTosecond+minuteTosecond+action.payloadsecondwork
-            // state.resultWorkinSecond = res
+            const hourTosecond : number = action.payloadhourwork * 3600
+            const minuteTosecond : number = action.payloadminutework * 60
+            const res : number = hourTosecond+minuteTosecond+action.payloadsecondwork
             return {
                 ...state,
                 resultWorkinSecond:res
             }
         case EXCHAHNGETOSECONDBREAK:
-            const minuteTosecondBreak = action.payloadminutebreak * 60
-            const resBreak = minuteTosecondBreak+action.payloadsecondbreak
-            // state.resultBreakinSecond= resBreak
+            const minuteTosecondBreak : number= action.payloadminutebreak * 60
+            const resBreak : number = minuteTosecondBreak+action.payloadsecondbreak
             return {
                 ...state,
                 resultBreakinSecond:resBreak
             }
         case EXCHAHNGETOSECONDLONGBREAK:
-            const minuteToSecondLongBreak = action.payloadminutelongbreak * 60
-            const resLongBreak = minuteToSecondLongBreak+action.payloadsecondlongbreak
-            // state.resultLongBreakinSecond = resLongBreak
+            const minuteToSecondLongBreak : number= action.payloadminutelongbreak * 60
+            const resLongBreak : number = minuteToSecondLongBreak+action.payloadsecondlongbreak
             return{
                 ...state,
                 resultLongBreakinSecond:resLongBreak

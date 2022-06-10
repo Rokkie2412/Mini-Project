@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Snapshot UI test settings modal screens Snapshot 1`] = `<settingsModal />`;
