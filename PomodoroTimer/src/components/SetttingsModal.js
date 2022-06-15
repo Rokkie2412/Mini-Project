@@ -35,10 +35,8 @@ const Settings = ({show, setshow, setwork}: settingstype): React.Node => {
   const dispatch : Function = useDispatch();
   const resWorkinSec: number = useSelector(state => state.resultWorkinSecond);
   const resBreakinSec: number = useSelector(state => state.resultBreakinSecond);
-  const resLongBreakinSec: number = useSelector(
-    state => state.resultLongBreakinSecond,
-  );
-
+  const resLongBreakinSec: number = useSelector(state => state.resultLongBreakinSecond);
+  // console.log(resWorkinSec)
   return (
     <Modal visible={show} animationType="slide" transparent={true}>
       <KeyboardAvoidingView
@@ -142,12 +140,6 @@ const Settings = ({show, setshow, setwork}: settingstype): React.Node => {
               dispatch(exchangetosecwork(hour, minute, second));
               dispatch(exchangetosecBreak(shortminute, shortSecond));
               dispatch(exchangetosecLongBreak(longMinute, longSecond));
-              setTimeout(() => {
-                setwork(resWorkinSec);
-              }, 500);
-              console.log(resWorkinSec);
-              console.log(resBreakinSec);
-              console.log(resLongBreakinSec);
             }}>
             <Text style={styles.button}>Save</Text>
           </Pressable>

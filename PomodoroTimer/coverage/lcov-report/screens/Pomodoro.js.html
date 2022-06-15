@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">1.53% </span>
+                <span class="strong">1.47% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>1/65</span>
+                <span class='fraction'>1/68</span>
             </div>
         
             
@@ -39,14 +39,14 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/13</span>
+                <span class='fraction'>0/14</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">1.58% </span>
+                <span class="strong">1.51% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>1/63</span>
+                <span class='fraction'>1/66</span>
             </div>
         
             
@@ -240,7 +240,11 @@
 <a name='L175'></a><a href='#L175'>175</a>
 <a name='L176'></a><a href='#L176'>176</a>
 <a name='L177'></a><a href='#L177'>177</a>
-<a name='L178'></a><a href='#L178'>178</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L178'></a><a href='#L178'>178</a>
+<a name='L179'></a><a href='#L179'>179</a>
+<a name='L180'></a><a href='#L180'>180</a>
+<a name='L181'></a><a href='#L181'>181</a>
+<a name='L182'></a><a href='#L182'>182</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -304,6 +308,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -335,7 +343,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -436,7 +444,7 @@ import styles from '../styles/Pomodorostyles';
 import {
   displayTimer,
   startTimer,
-  createChannel,
+  ChannelTest,
   handleNotification,
   handleNotificationLongBreak,
   TimerinNotification,
@@ -466,7 +474,7 @@ const Pomodoro = <span class="fstat-no" title="function not covered" >()</span>:
   const [help, setHelp] = <span class="cstat-no" title="statement not covered" >useState&lt;boolean&gt;(false);</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >  useEffect(<span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    createChannel();</span>
+<span class="cstat-no" title="statement not covered" >    ChannelTest();</span>
   }, []);
 &nbsp;
 <span class="cstat-no" title="statement not covered" >  useEffect(<span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
@@ -478,6 +486,10 @@ const Pomodoro = <span class="fstat-no" title="function not covered" >()</span>:
 <span class="cstat-no" title="statement not covered" >      reactNativeBackgroundTimer.stopBackgroundTimer();</span>
     };
   }, [timerOn]);
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  useEffect(<span class="fstat-no" title="function not covered" >()</span>=&gt;{</span>
+<span class="cstat-no" title="statement not covered" >    setSecondLeft(workhourinsec)</span>
+  },[workhourinsec])
 &nbsp;
 <span class="cstat-no" title="statement not covered" >  useEffect(<span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >    if (secondLeft === 0) {</span>
@@ -491,28 +503,28 @@ const Pomodoro = <span class="fstat-no" title="function not covered" >()</span>:
 <span class="cstat-no" title="statement not covered" >        handleNotification(judul, pesan);</span>
 <span class="cstat-no" title="statement not covered" >        Vibration.vibrate(1000);</span>
       } else <span class="cstat-no" title="statement not covered" >if (count % 2 === 1) {</span>
-<span class="cstat-no" title="statement not covered" >        if (count &lt;= 6) {</span>
-<span class="cstat-no" title="statement not covered" >          setJudul('Timer to work!');</span>
-<span class="cstat-no" title="statement not covered" >          setPesan('Time to work, keep it up! u doing good!');</span>
-<span class="cstat-no" title="statement not covered" >          setSecondLeft(Breakinsec);</span>
-<span class="cstat-no" title="statement not covered" >          setCount(count + 1);</span>
-<span class="cstat-no" title="statement not covered" >          setTitle('Short Break! Catch a Breath');</span>
-<span class="cstat-no" title="statement not covered" >          handleNotification(judul, pesan);</span>
-<span class="cstat-no" title="statement not covered" >          Vibration.vibrate(1000);</span>
+<span class="cstat-no" title="statement not covered" >          if (count &lt;= 6) {</span>
+<span class="cstat-no" title="statement not covered" >            setJudul('Timer to work!');</span>
+<span class="cstat-no" title="statement not covered" >            setPesan('Time to work, keep it up! u doing good!');</span>
+<span class="cstat-no" title="statement not covered" >            setSecondLeft(Breakinsec);</span>
+<span class="cstat-no" title="statement not covered" >            setCount(count + 1);</span>
+<span class="cstat-no" title="statement not covered" >            setTitle('Short Break! Catch a Breath');</span>
+<span class="cstat-no" title="statement not covered" >            handleNotification(judul, pesan);</span>
+<span class="cstat-no" title="statement not covered" >            Vibration.vibrate(1000);</span>
         } else <span class="cstat-no" title="statement not covered" >if (count === 7) {</span>
-<span class="cstat-no" title="statement not covered" >          setJudul('Time to long break!');</span>
-<span class="cstat-no" title="statement not covered" >          setPesan("it's time to long break! Use it wisely");</span>
-<span class="cstat-no" title="statement not covered" >          setSecondLeft(longBreakinSec);</span>
-<span class="cstat-no" title="statement not covered" >          setCount(0);</span>
-<span class="cstat-no" title="statement not covered" >          setTitle('Break Time! Enjoy Your Break');</span>
-<span class="cstat-no" title="statement not covered" >          handleNotificationLongBreak();</span>
-<span class="cstat-no" title="statement not covered" >          Vibration.vibrate(1500);</span>
+<span class="cstat-no" title="statement not covered" >            setJudul('Time to long break!');</span>
+<span class="cstat-no" title="statement not covered" >            setPesan("it's time to long break! Use it wisely");</span>
+<span class="cstat-no" title="statement not covered" >            setSecondLeft(longBreakinSec);</span>
+<span class="cstat-no" title="statement not covered" >            setCount(0);</span>
+<span class="cstat-no" title="statement not covered" >            setTitle('Break Time! Enjoy Your Break');</span>
+<span class="cstat-no" title="statement not covered" >            handleNotificationLongBreak();</span>
+<span class="cstat-no" title="statement not covered" >            Vibration.vibrate(1500);</span>
         }
       }
       // reactNativeBackgroundTimer.stopBackgroundTimer()
     }
-  }, [secondLeft]);
-&nbsp;
+  }, [secondLeft,setSecondLeft]);
+<span class="cstat-no" title="statement not covered" >  console.log(secondLeft)</span>
 <span class="cstat-no" title="statement not covered" >  return (</span>
     &lt;KeyboardAvoidingView style={styles.mainContainer}&gt;
       &lt;View style={styles.headerContainer}&gt;
@@ -601,7 +613,7 @@ export default Pomodoro;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Thu Jun 09 2022 15:07:36 GMT+0700 (Western Indonesia Time)
+                at Tue Jun 14 2022 21:16:57 GMT+0700 (Western Indonesia Time)
             </div>
         <script src="../prettify.js"></script>
         <script>

@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">3.22% </span>
+                <span class="strong">3.7% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>1/31</span>
+                <span class='fraction'>1/27</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">3.44% </span>
+                <span class="strong">4.16% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>1/29</span>
+                <span class='fraction'>1/24</span>
             </div>
         
             
@@ -215,10 +215,7 @@
 <a name='L150'></a><a href='#L150'>150</a>
 <a name='L151'></a><a href='#L151'>151</a>
 <a name='L152'></a><a href='#L152'>152</a>
-<a name='L153'></a><a href='#L153'>153</a>
-<a name='L154'></a><a href='#L154'>154</a>
-<a name='L155'></a><a href='#L155'>155</a>
-<a name='L156'></a><a href='#L156'>156</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L153'></a><a href='#L153'>153</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -241,7 +238,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -253,8 +253,6 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -359,10 +357,6 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -373,7 +367,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/* eslint-disable prettier/prettier */
+/**
  * @format
  * @flow
  */
@@ -386,7 +381,8 @@ import {
   TextInput,
   KeyboardAvoidingView,
 } from 'react-native';
-import React, {useState} from 'react';
+import {useState} from 'react';
+import * as React from 'react';
 import styles from '../styles/SettingsStyle';
 import {useSelector, useDispatch} from 'react-redux';
 import {
@@ -395,8 +391,9 @@ import {
   exchangetosecLongBreak,
 } from '../redux/redux';
 import {onchecklimit} from '../functions/PomodoroFunction';
+import type {settingstype} from "../components/pomodoro.type"
 &nbsp;
-const Settings = <span class="fstat-no" title="function not covered" >({</span>show, setshow, setwork}: any): any =&gt; {
+const Settings = <span class="fstat-no" title="function not covered" >({</span>show, setshow, setwork}: settingstype): React.Node =&gt; {
   const [hour, setHour] = <span class="cstat-no" title="statement not covered" >useState&lt;string&gt;('');</span>
   const [minute, setMinute] = <span class="cstat-no" title="statement not covered" >useState&lt;string&gt;('');</span>
   const [second, setSecond] = <span class="cstat-no" title="statement not covered" >useState&lt;string&gt;('');</span>
@@ -404,13 +401,11 @@ const Settings = <span class="fstat-no" title="function not covered" >({</span>s
   const [shortSecond, setShortSecond] = <span class="cstat-no" title="statement not covered" >useState&lt;string&gt;('');</span>
   const [longMinute, setLongMinute] = <span class="cstat-no" title="statement not covered" >useState&lt;string&gt;('');</span>
   const [longSecond, setLongSecond] = <span class="cstat-no" title="statement not covered" >useState&lt;string&gt;('');</span>
-  const dispatch = <span class="cstat-no" title="statement not covered" >useDispatch();</span>
+  const dispatch : Function = <span class="cstat-no" title="statement not covered" >useDispatch();</span>
   const resWorkinSec: number = <span class="cstat-no" title="statement not covered" >useSelector(<span class="fstat-no" title="function not covered" >st</span>ate =&gt; <span class="cstat-no" title="statement not covered" >state.resultWorkinSecond)</span>;</span>
   const resBreakinSec: number = <span class="cstat-no" title="statement not covered" >useSelector(<span class="fstat-no" title="function not covered" >st</span>ate =&gt; <span class="cstat-no" title="statement not covered" >state.resultBreakinSecond)</span>;</span>
-  const resLongBreakinSec: number = <span class="cstat-no" title="statement not covered" >useSelector(</span>
-<span class="fstat-no" title="function not covered" >    st</span>ate =&gt; <span class="cstat-no" title="statement not covered" >state.resultLongBreakinSecond,</span>
-  );
-&nbsp;
+  const resLongBreakinSec: number = <span class="cstat-no" title="statement not covered" >useSelector(<span class="fstat-no" title="function not covered" >st</span>ate =&gt; <span class="cstat-no" title="statement not covered" >state.resultLongBreakinSecond)</span>;</span>
+  // console.log(resWorkinSec)
 <span class="cstat-no" title="statement not covered" >  return (</span>
     &lt;Modal visible={show} animationType="slide" transparent={true}&gt;
       &lt;KeyboardAvoidingView
@@ -514,10 +509,6 @@ const Settings = <span class="fstat-no" title="function not covered" >({</span>s
 <span class="cstat-no" title="statement not covered" >              dispatch(exchangetosecwork(hour, minute, second));</span>
 <span class="cstat-no" title="statement not covered" >              dispatch(exchangetosecBreak(shortminute, shortSecond));</span>
 <span class="cstat-no" title="statement not covered" >              dispatch(exchangetosecLongBreak(longMinute, longSecond));</span>
-<span class="cstat-no" title="statement not covered" >              setwork(resWorkinSec);</span>
-<span class="cstat-no" title="statement not covered" >              console.log(resWorkinSec);</span>
-<span class="cstat-no" title="statement not covered" >              console.log(resBreakinSec);</span>
-<span class="cstat-no" title="statement not covered" >              console.log(resLongBreakinSec);</span>
             }}&gt;
             &lt;Text style={styles.button}&gt;Save&lt;/Text&gt;
           &lt;/Pressable&gt;
@@ -535,7 +526,7 @@ export default Settings;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Thu Jun 09 2022 15:07:36 GMT+0700 (Western Indonesia Time)
+                at Tue Jun 14 2022 21:16:57 GMT+0700 (Western Indonesia Time)
             </div>
         <script src="../prettify.js"></script>
         <script>

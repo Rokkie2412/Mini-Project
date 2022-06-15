@@ -41,7 +41,7 @@ export const onchecklimit = (value: string, setValue: Function): void => {
   else setValue(parsedqty);
 };
 
-export const createChannel = (): void => {
+export const ChannelTest = (): void => {
   PushNotification.createChannel({
     channelId: 'test-channel',
     channelName: 'Test Channel',
@@ -70,16 +70,5 @@ export const handleNotificationLongBreak = (): void => {
     id: 1,
     vibrate: true,
     vibration: 1000,
-  });
-};
-
-export const TimerinNotification = (judul: string, pesan: string): void => {
-  PushNotification.localNotification({
-    channelId: 'test-channel',
-    title: judul,
-    message: pesan,
-    playSound: false,
-    id: 2,
-    vibrate: false,
   });
 };

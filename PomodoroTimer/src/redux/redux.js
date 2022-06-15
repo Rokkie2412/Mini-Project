@@ -1,4 +1,3 @@
-
 /**
  * @format
  * @flow
@@ -36,7 +35,6 @@ let initialState : Object  ={
 export const mainReducer = (state:Object=initialState, action:function):Function =>{
     switch (action.type) {
         case EXCHAHNGETOSECONDS:
-            
             const hourTosecond : number = action.payloadhourwork * 3600
             const minuteTosecond : number = action.payloadminutework * 60
             const res : number = hourTosecond+minuteTosecond+action.payloadsecondwork

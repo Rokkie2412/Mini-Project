@@ -1,3 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Snapshot UI test settings modal screens Snapshot 1`] = `<settingsModal />`;
+exports[`Setting render correctly 1`] = `
+<settingsModal
+  setshow={[MockFunction]}
+  setwork={[MockFunction]}
+  show={[MockFunction]}
+/>
+`;

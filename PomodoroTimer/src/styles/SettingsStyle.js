@@ -1,11 +1,11 @@
-import { StyleSheet } from 'react-native';
+import {StyleSheet} from 'react-native';
 
 export default StyleSheet.create({
   mainContainer: {
     flex: 1,
     backgroundColor: '#393E46',
     margin: 'auto',
-    marginVertical: '25%',
+    marginVertical: '27%',
     marginHorizontal: '5%',
     borderRadius: 30,
     position: 'absolute',

@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import {StyleSheet} from 'react-native';
 
 export default StyleSheet.create({
   mainContainer: {
@@ -36,7 +36,7 @@ export default StyleSheet.create({
     borderRadius: 30,
     paddingVertical: 40,
     maxWidth: '92%',
-    maxHeight: '55%',
+    maxHeight: '50%',
   },
   showsection: {
     textAlign: 'center',
