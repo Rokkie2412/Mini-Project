@@ -50,6 +50,7 @@ const Settings = ({show, setshow, setwork}: settingstype): React.Node => {
           <Text style={styles.set}>Set Work Timer</Text>
           <View style={styles.inputSection}>
             <TextInput
+              testID="sethour"
               placeholderTextColor={'#EEEEEE'}
               style={styles.setTimerWork}
               keyboardType="number-pad"
@@ -60,6 +61,7 @@ const Settings = ({show, setshow, setwork}: settingstype): React.Node => {
               }}
             />
             <TextInput
+            testID="setminute"
               placeholderTextColor={'#EEEEEE'}
               style={styles.setTimerWork}
               keyboardType="number-pad"
@@ -70,6 +72,7 @@ const Settings = ({show, setshow, setwork}: settingstype): React.Node => {
               }}
             />
             <TextInput
+            testID="setsecond"
               placeholderTextColor={'#EEEEEE'}
               style={styles.setTimerWork}
               keyboardType="number-pad"
@@ -85,6 +88,7 @@ const Settings = ({show, setshow, setwork}: settingstype): React.Node => {
           <Text style={styles.set}>Set Short Break Timer</Text>
           <View style={styles.inputSection}>
             <TextInput
+              testID="setshortminute"
               placeholderTextColor={'#EEEEEE'}
               style={styles.setTimerWork}
               keyboardType="number-pad"
@@ -95,6 +99,7 @@ const Settings = ({show, setshow, setwork}: settingstype): React.Node => {
               }}
             />
             <TextInput
+            testID="setshortsecond"
               placeholderTextColor={'#EEEEEE'}
               style={styles.setTimerWork}
               keyboardType="number-pad"
@@ -110,6 +115,7 @@ const Settings = ({show, setshow, setwork}: settingstype): React.Node => {
           <Text style={styles.set}>Set Long Break Timer</Text>
           <View style={styles.inputSection}>
             <TextInput
+            testID="setlongminute"
               placeholderTextColor={'#EEEEEE'}
               style={styles.setTimerWork}
               keyboardType="number-pad"
@@ -120,6 +126,7 @@ const Settings = ({show, setshow, setwork}: settingstype): React.Node => {
               }}
             />
             <TextInput
+            testID="setlongsecond"
               placeholderTextColor={'#EEEEEE'}
               style={styles.setTimerWork}
               keyboardType="number-pad"
@@ -132,14 +139,16 @@ const Settings = ({show, setshow, setwork}: settingstype): React.Node => {
           </View>
         </View>
         <View style={styles.buttonSection}>
-          <Pressable onPress={() => setshow(!show)}>
+          <Pressable testID="CloseSetting" onPress={() => setshow(!show)}>
             <Text style={styles.button}>Cancel</Text>
           </Pressable>
           <Pressable
+            testID="SaveSetting"
             onPress={() => {
               dispatch(exchangetosecwork(hour, minute, second));
               dispatch(exchangetosecBreak(shortminute, shortSecond));
               dispatch(exchangetosecLongBreak(longMinute, longSecond));
+              setshow(!show)
             }}>
             <Text style={styles.button}>Save</Text>
           </Pressable>

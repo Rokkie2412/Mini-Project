@@ -1,4 +1,6 @@
-import {StyleSheet} from 'react-native';
+import {StyleSheet,Dimensions} from 'react-native';
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 
 export default StyleSheet.create({
   mainContainer: {
@@ -8,9 +10,8 @@ export default StyleSheet.create({
     marginVertical: '27%',
     marginHorizontal: '5%',
     borderRadius: 30,
-    position: 'absolute',
-    width: '90%',
-    height: '70%',
+    width: windowWidth*0.9,
+    height: windowHeight*0.7,
   },
   headerSection: {
     flexDirection: 'row',

@@ -20,6 +20,9 @@ import {
   ChannelTest,
   handleNotification,
   handleNotificationLongBreak,
+  timerset,
+  ButtonDisable
+
 } from '../functions/PomodoroFunction';
 import Ion from 'react-native-vector-icons/Ionicons';
 import Settings from '../components/SetttingsModal';
@@ -64,44 +67,16 @@ const Pomodoro = (): React.Node => {
   },[workhourinsec])
 
   useEffect(() => {
-    if (secondLeft === 0) {
-      if (count % 2 === 0) {
-        setJudul('Time to short break!');
-        setPesan("it's time to short break! Get streching up");
-        setSecondLeft(workhourinsec);
-        setCount(count + 1);
-        setWorkCycle(wokrCycle + 1);
-        setTitle('Keep it Up!');
-        handleNotification(judul, pesan);
-        Vibration.vibrate(1000);
-      } else if (count % 2 === 1) {
-          if (count <= 6) {
-            setJudul('Timer to work!');
-            setPesan('Time to work, keep it up! u doing good!');
-            setSecondLeft(Breakinsec);
-            setCount(count + 1);
-            setTitle('Short Break! Catch a Breath');
-            handleNotification(judul, pesan);
-            Vibration.vibrate(1000);
-        } else if (count === 7) {
-            setJudul('Time to long break!');
-            setPesan("it's time to long break! Use it wisely");
-            setSecondLeft(longBreakinSec);
-            setCount(0);
-            setTitle('Break Time! Enjoy Your Break');
-            handleNotificationLongBreak();
-            Vibration.vibrate(1500);
-        }
-      }
-    }
+    timerset(count,setJudul,setPesan,setSecondLeft,workhourinsec,setCount,setTitle,judul,pesan,Breakinsec,longBreakinSec,setWorkCycle,wokrCycle,secondLeft)
   }, [secondLeft,setSecondLeft]);
-  console.log(secondLeft)
   return (
     <KeyboardAvoidingView style={styles.mainContainer}>
       <View style={styles.headerContainer}>
         <Text style={styles.Header}>Pomodoro Timer</Text>
       </View>
-      <Pressable onPress={() => setHelp(true)}>
+      <Pressable 
+      testID='Help'
+      onPress={() => setHelp(true)}>
         <Ion name="help-circle-outline" style={styles.HelpIcon} />
       </Pressable>
       <View style={styles.TimerSection}>
@@ -117,6 +92,7 @@ const Pomodoro = (): React.Node => {
         <View style={styles.iconSection}>
           {timerOn === false ? (
             <Pressable
+              testID='play'
               onPress={() => {
                 setTimerOn(true);
                 setTitle('Timer Play');
@@ -125,6 +101,7 @@ const Pomodoro = (): React.Node => {
             </Pressable>
           ) : (
             <Pressable
+            testID='pause'
               onPress={() => {
                 setTimerOn(false);
                 setTitle('Timer Pause');
@@ -133,6 +110,7 @@ const Pomodoro = (): React.Node => {
             </Pressable>
           )}
           <Pressable
+            testID='stop'
             onPress={() => {
               reactNativeBackgroundTimer.stopBackgroundTimer();
               setSecondLeft(workhourinsec);
@@ -154,12 +132,9 @@ const Pomodoro = (): React.Node => {
 
       <View style={styles.buttonSection}>
         <Pressable
+        testID='setting'
           onPress={() => {
-            {
-              timerOn === true
-                ? ToastAndroid.show('Timer is on!', ToastAndroid.LONG)
-                : setModalShown(!modalShown);
-            }
+            ButtonDisable(timerOn,setModalShown,modalShown)
           }}>
           <Text style={styles.button}>
             Settings <Ion name="settings" size={18} />

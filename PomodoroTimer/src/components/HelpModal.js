@@ -14,7 +14,7 @@ const HelpModal = ({HelpVisible, setHelpVisible}:ModalHelp): React.Node => {
     <Modal visible={HelpVisible} animationType="fade" transparent={true}>
       <KeyboardAvoidingView style={styles.mainContainer}>
         <View style={styles.CloseContainer}>
-          <Pressable onPress={() => setHelpVisible(false)}>
+          <Pressable testID="setupVisibleModal" onPress={() => setHelpVisible(false)}>
             <Ion name="close" style={styles.closeIcon} />
           </Pressable>
         </View>
@@ -56,6 +56,7 @@ const HelpModal = ({HelpVisible, setHelpVisible}:ModalHelp): React.Node => {
           </View>
         </View>
         <Pressable
+          testID="VisibleModal"
           onPress={() => setHelpVisible(false)}
           style={styles.CloseSction}>
           <Text style={styles.close}>Close</Text>

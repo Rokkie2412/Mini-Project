@@ -13,6 +13,7 @@
     "@react-native-async-storage/async-storage": "^1.17.6",
     "@react-navigation/native": "^6.0.10",
     "@react-navigation/native-stack": "^6.6.2",
+    "enzyme": "^3.11.0",
     "react": "17.0.2",
     "react-native": "0.68.2",
     "react-native-background-timer": "^2.4.1",
@@ -40,6 +41,16 @@
     "react-test-renderer": "17.0.2"
   },
   "jest": {
-    "preset": "react-native"
+    "preset": "react-native",
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "src/**/*.js",
+      "!src/redux/redux.js",
+      "!src/redux/store.js",
+      "!src/styles/HelpModalStyle.js",
+      "!src/styles/Pomodorostyles.js",
+      "!src/styles/SettingsStyle.js",
+      "!src/components/pomodoro.type.js"
+    ]
   }
 }

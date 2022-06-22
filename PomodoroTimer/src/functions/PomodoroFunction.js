@@ -2,9 +2,11 @@
  * @format
  * @flow
  */
-
+import {Vibration,ToastAndroid,} from 'react-native'
 import reactNativeBackgroundTimer from 'react-native-background-timer';
 import PushNotification from 'react-native-push-notification';
+
+
 
 export const displayTimer = (secondLeft: number): Object => {
   let hours: number = Math.floor(secondLeft / 60 / 60);
@@ -57,7 +59,7 @@ export const handleNotification = (judul: string, pesan: string): void => {
     playSound: true,
     id: 1,
     vibrate: true,
-    vibration: 1000,
+    vibration: 2000,
   });
 };
 
@@ -69,6 +71,48 @@ export const handleNotificationLongBreak = (): void => {
     playSound: true,
     id: 1,
     vibrate: true,
-    vibration: 1000,
+    vibration: 3000,
   });
 };
+
+export const timerset = 
+(count:number,setJudul:Function,setPesan:Function,setSecondLeft:Function,workhourinsec:number,setCount:Function,setTitle:Function,judul:string,pesan:string,Breakinsec:number,longBreakinSec:number,setWorkCycle:Function,wokrCycle:number,secondLeft:number):void =>{
+  if(secondLeft === 0){
+    if(count % 2 === 0){
+    setJudul('Time to short break!');
+    setPesan("it's time to short break! Get streching up");
+    setSecondLeft(workhourinsec);
+    setCount(count + 1);
+    setWorkCycle(wokrCycle + 1);
+    setTitle('Time to work!');
+    handleNotification(judul, pesan);
+    // Vibration.vibrate(1000);
+  }else if(count % 2 === 1){
+    if(count<=6){
+      setJudul('Timer to work!');
+      setPesan('Time to work, keep it up! u doing good!');
+      setSecondLeft(Breakinsec);
+      setCount(count + 1);
+      setTitle('Short Break! Catch a Breath');
+      handleNotification(judul, pesan);
+      // Vibration.vibrate(1000);
+    }else if(count === 7){
+      setJudul('Time to long break!');
+      setPesan("it's time to long break! Use it wisely");
+      setSecondLeft(longBreakinSec);
+      setCount(0);
+      setTitle('Break Time! Enjoy Your Break');
+      handleNotificationLongBreak();
+      // Vibration.vibrate(1500);
+    }
+  }
+  }
+}
+
+export const ButtonDisable = (timerOn:boolean,setModalShow:Function,modalShown:boolean) =>{
+  if(timerOn === true){
+    ToastAndroid.show('Time os on!',ToastAndroid.LONG)
+  }else{
+    setModalShow(!modalShown)
+  }
+}

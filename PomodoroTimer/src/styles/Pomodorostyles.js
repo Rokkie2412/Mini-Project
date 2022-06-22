@@ -1,4 +1,6 @@
-import {StyleSheet} from 'react-native';
+import {StyleSheet,Dimensions} from 'react-native';
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 
 export default StyleSheet.create({
   mainContainer: {
@@ -35,8 +37,8 @@ export default StyleSheet.create({
     marginHorizontal: 15,
     borderRadius: 30,
     paddingVertical: 40,
-    maxWidth: '92%',
-    maxHeight: '50%',
+    maxWidth: windowWidth*0.95,
+    maxHeight: windowHeight*0.45,
   },
   showsection: {
     textAlign: 'center',
@@ -48,7 +50,7 @@ export default StyleSheet.create({
   time: {
     textAlign: 'center',
     color: '#EEEEEE',
-    fontSize: 64,
+    fontSize: 59,
     fontWeight: 'bold',
     paddingVertical: 60,
     marginHorizontal: '5%',
