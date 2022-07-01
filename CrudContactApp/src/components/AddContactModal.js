@@ -14,24 +14,24 @@ import styles from '../styles/ModalAddContact.style'
 import AwesomeAlert from './AwesomeAlert';
 
 const AddContactModal = ({showmodal,setmodal}:Add):React.Node =>{
-    const [first,setFirst] = useState('')
-    const [last,setLast] = useState('')
-    const [age,setAge] = useState('')
-    const [show,setshow] = useState(false)
-    const [image,setImage] = useState('N/A')
-    const [error,setError] = useState('')
+    const [first,setFirst] = useState<string>('')
+    const [last,setLast] = useState<string>('')
+    const [age,setAge] = useState<string>('')
+    const [show,setshow] = useState<boolean>(false)
+    const [image,setImage] = useState<string>('N/A')
+    const [error,setError] = useState<string>('')
 
-    const AddPack = () =>{
+    const AddPack = ():void =>{
         setmodal(false)
         const tempPasre = parseInt(age)
         addData(first,last,tempPasre,image)
         setError('')
         emptyAll(setImage,setLast,setFirst,setAge)
     }
-    console.log(AddorEditContactLock(first,last,age))
+
+
     return(
         <KeyboardAvoidingView
-        // keyboardVerticalOffset={0}
         behavior='height'
         pointerEvents='box-none'
         >
@@ -42,6 +42,7 @@ const AddContactModal = ({showmodal,setmodal}:Add):React.Node =>{
             >
                 <View style={styles.mainContainer}>
                     <Pressable 
+                    testID='person'
                     onPress={()=>setshow(!show)}
                     style={styles.personIconView}>
                          {image === "N/A" ? <Icon style={styles.personIcon} name="person"/> :
@@ -50,6 +51,7 @@ const AddContactModal = ({showmodal,setmodal}:Add):React.Node =>{
                     </Pressable>
                     <View style={styles.TextInputSection}>
                         <TextInput
+                            testID='first'
                             placeholderTextColor="#eeeeee" 
                             placeholder="Input first name here"
                             style={styles.textinput}
@@ -57,6 +59,7 @@ const AddContactModal = ({showmodal,setmodal}:Add):React.Node =>{
                             onChangeText={(temp)=>setFirst(temp)}
                         />
                         <TextInput
+                            testID='last'
                             placeholderTextColor="#eeeeee" 
                             placeholder="Input last name here"
                             style={styles.textinput}
@@ -64,6 +67,7 @@ const AddContactModal = ({showmodal,setmodal}:Add):React.Node =>{
                             onChangeText={(temp)=>setLast(temp)}
                         />
                         <TextInput
+                            testID='age'
                             placeholderTextColor="#eeeeee" 
                             placeholder="Age"
                             style={styles.textinputAge}
@@ -74,7 +78,8 @@ const AddContactModal = ({showmodal,setmodal}:Add):React.Node =>{
                     </View>
                     <Text style={styles.error}>{error}</Text>
                     <View style={styles.ButtonSection}>
-                        <Pressable 
+                        <Pressable
+                        testID='cancel' 
                         onPress={()=>{
                             setmodal(false)
                             emptyAll(setImage,setLast,setFirst,setAge)

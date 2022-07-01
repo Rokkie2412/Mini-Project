@@ -19,6 +19,8 @@ target 'CrudContactApp' do
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
 
+  pod 'react-native-netinfo', :path => '../node_modules/@react-native-community/netinfo'
+
   target 'CrudContactAppTests' do
     inherit! :complete
     # Pods for testing

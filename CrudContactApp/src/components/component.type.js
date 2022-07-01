@@ -1,8 +1,10 @@
-//@flow
+/**
+ * @flow
+ */
 
 export type Add={|
     showmodal:boolean,
-    setmodal:Function
+    setmodal:Function,
 |}
 
 export type PickAdd={|
@@ -19,4 +21,23 @@ export type Cards={|
     first:string,
     last:string,
     Age:string
+|}
+
+export type EditContact={|
+    show:boolean,
+    setshow:Function,
+    id:string,
+    first:string,
+    last:string,
+    age:string,
+    photo:string,
+    setfirst:Function,
+    setlast:Function,
+    setage:Function,
+    setphoto:Function
+|}
+
+export type SearchBar={|
+    search:string,
+    setSearch:Function
 |}

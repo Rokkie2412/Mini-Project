@@ -1,0 +1,336 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing for Modal Edit Contact Snapshot for Edit Contact should render correctly 1`] = `
+<View
+  onLayout={[Function]}
+  pointerEvents="box-none"
+>
+  <Mocked Modal React Native
+    transparent={true}
+  >
+    <View
+      style={
+        Object {
+          "alignSelf": "center",
+          "backgroundColor": "#393E46",
+          "borderRadius": 30,
+          "flex": 1,
+          "height": "60%",
+          "justifyContent": "center",
+          "marginHorizontal": "5%",
+          "marginVertical": "20%",
+          "position": "absolute",
+          "width": "95%",
+        }
+      }
+    >
+      <View
+        accessible={true}
+        collapsable={false}
+        focusable={true}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={Object {}}
+        testID="person"
+      >
+        <Mocked Ionicons
+          name="person"
+          style={
+            Object {
+              "alignSelf": "center",
+              "backgroundColor": "#00ADB5",
+              "borderRadius": 50,
+              "color": "#EEEEEE",
+              "fontSize": 50,
+              "margin": "9%",
+              "padding": 15,
+            }
+          }
+        />
+      </View>
+      <View
+        style={
+          Object {
+            "marginHorizontal": "10%",
+          }
+        }
+      >
+        <TextInput
+          onChangeText={[Function]}
+          placeholder="Input first name here"
+          placeholderTextColor="#eeeeee"
+          style={
+            Object {
+              "borderBottomWidth": 1,
+              "borderColor": "#eeeeee",
+              "marginBottom": "7%",
+            }
+          }
+          testID="first"
+          value=""
+        />
+        <TextInput
+          onChangeText={[Function]}
+          placeholder="Input last name here"
+          placeholderTextColor="#eeeeee"
+          style={
+            Object {
+              "borderBottomWidth": 1,
+              "borderColor": "#eeeeee",
+              "marginBottom": "7%",
+            }
+          }
+          testID="last"
+          value=""
+        />
+        <TextInput
+          keyboardType="numeric"
+          onChangeText={[Function]}
+          placeholder="Age"
+          placeholderTextColor="#eeeeee"
+          style={
+            Object {
+              "alignSelf": "center",
+              "borderBottomWidth": 1,
+              "borderColor": "#eeeeee",
+              "marginBottom": "7%",
+              "textAlign": "center",
+              "width": "20%",
+            }
+          }
+          testID="age"
+          value=""
+        />
+      </View>
+      <Text
+        style={
+          Object {
+            "alignSelf": "center",
+            "color": "#EEEEEE",
+            "fontSize": 7,
+          }
+        }
+      >
+        
+      </Text>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "space-evenly",
+            "marginTop": "4%",
+          }
+        }
+      >
+        <View
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "justifyContent": "space-evenly",
+            }
+          }
+          testID="cancel"
+        >
+          <Text
+            style={
+              Object {
+                "backgroundColor": "#00ADB5",
+                "borderRadius": 50,
+                "color": "#EEEEEE",
+                "fontSize": 20,
+                "fontWeight": "bold",
+                "maxWidth": "110%",
+                "padding": 10,
+                "textAlign": "center",
+                "width": "120%",
+              }
+            }
+          >
+            Cancel
+          </Text>
+        </View>
+        <View
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "justifyContent": "space-evenly",
+            }
+          }
+        >
+          <Text
+            style={
+              Object {
+                "backgroundColor": "#00ADB5",
+                "borderRadius": 50,
+                "color": "#EEEEEE",
+                "fontSize": 20,
+                "fontWeight": "bold",
+                "maxWidth": "110%",
+                "padding": 10,
+                "textAlign": "center",
+                "width": "120%",
+              }
+            }
+          >
+            Add
+          </Text>
+        </View>
+      </View>
+    </View>
+    <Mocked Modal React Native
+      isVisible={false}
+      style={
+        Object {
+          "alignSelf": "center",
+          "backgroundColor": "#EEEEEE",
+          "borderRadius": 30,
+          "flex": 1,
+          "height": "10%",
+          "marginVertical": "50%",
+          "position": "absolute",
+          "width": "60%",
+        }
+      }
+    >
+      <View
+        accessible={true}
+        collapsable={false}
+        focusable={true}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        testID="Close"
+      >
+        <Mocked Ionicons
+          name="close"
+          style={
+            Object {
+              "alignSelf": "flex-end",
+              "backgroundColor": "#222831",
+              "borderRadius": 50,
+              "color": "#EEEEEE",
+              "marginBottom": 20,
+              "marginRight": 10,
+              "padding": 8,
+            }
+          }
+        />
+      </View>
+      <Text
+        style={
+          Object {
+            "color": "#222831",
+            "fontSize": 18,
+            "fontWeight": "600",
+            "textAlign": "center",
+          }
+        }
+      >
+        Choose image source :
+      </Text>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "space-evenly",
+          }
+        }
+      >
+        <View
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          testID="openCamera"
+        >
+          <Mocked Ionicons
+            name="camera"
+            style={
+              Object {
+                "backgroundColor": "#222831",
+                "borderRadius": 50,
+                "color": "#EEEEEE",
+                "fontSize": 24,
+                "margin": 10,
+                "padding": "10%",
+              }
+            }
+          />
+        </View>
+        <View
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          testID="openGallery"
+        >
+          <Mocked Ionicons
+            name="image"
+            style={
+              Object {
+                "backgroundColor": "#222831",
+                "borderRadius": 50,
+                "color": "#EEEEEE",
+                "fontSize": 24,
+                "margin": 10,
+                "padding": "10%",
+              }
+            }
+          />
+        </View>
+      </View>
+    </Mocked Modal React Native>
+  </Mocked Modal React Native>
+</View>
+`;

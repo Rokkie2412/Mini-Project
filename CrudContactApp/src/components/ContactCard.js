@@ -11,7 +11,6 @@ import styles from '../styles/ContactCard.Style'
 import Icon from 'react-native-vector-icons/Ionicons'
 
 const ContactCard = ({show,setshow,image,first,last,Age}:Cards):React.Node =>{
-    console.log(image)
     return(
         <Modal
         isVisible={show}
@@ -35,16 +34,13 @@ const ContactCard = ({show,setshow,image,first,last,Age}:Cards):React.Node =>{
             </View>
             <View style={styles.button}>
                 <Pressable
+                testID='cancel'
                 onPress={()=>{
-                    setshow(!show)
+                    setshow(false)
                 }}
                 >
                     <Text style={styles.editButton}>Close</Text>
                 </Pressable>
-                <Pressable>
-                    <Text style={styles.editButton}> Edit </Text>
-                </Pressable>
-                
             </View>
         </Modal>
     )

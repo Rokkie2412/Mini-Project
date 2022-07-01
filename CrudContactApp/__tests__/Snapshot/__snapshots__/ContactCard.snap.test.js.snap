@@ -1,0 +1,172 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing for Contact Card Snapshot for Contact Card Should be render correctly 1`] = `
+<Mocked Modal React Native
+  style={
+    Object {
+      "alignSelf": "center",
+      "backgroundColor": "#393E46",
+      "borderRadius": 30,
+      "flex": 1,
+      "marginVertical": "50%",
+      "position": "absolute",
+      "width": "70%",
+    }
+  }
+>
+  <Text
+    style={
+      Object {
+        "color": "#EEEEEE",
+        "fontSize": 24,
+        "fontWeight": "bold",
+        "textAlign": "center",
+      }
+    }
+  >
+    Contact Card
+  </Text>
+  <Mocked Ionicons
+    name="person"
+    style={
+      Object {
+        "alignSelf": "center",
+        "backgroundColor": "#00ADB5",
+        "borderRadius": 50,
+        "color": "#EEEEEE",
+        "fontSize": 50,
+        "margin": "9%",
+        "padding": 15,
+      }
+    }
+  />
+  <View
+    style={
+      Object {
+        "alignSelf": "center",
+        "flexDirection": "row",
+        "width": "40%",
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#EEEEEE",
+          "fontWeight": "bold",
+        }
+      }
+    >
+      First Name:  
+    </Text>
+    <Text
+      style={
+        Object {
+          "borderBottomWidth": 1,
+          "borderColor": "#00ADB5",
+          "color": "#EEEEEE",
+        }
+      }
+    />
+  </View>
+  <View
+    style={
+      Object {
+        "alignSelf": "center",
+        "flexDirection": "row",
+        "width": "40%",
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#EEEEEE",
+          "fontWeight": "bold",
+        }
+      }
+    >
+      Last Name:  
+    </Text>
+    <Text
+      style={
+        Object {
+          "borderBottomWidth": 1,
+          "borderColor": "#00ADB5",
+          "color": "#EEEEEE",
+        }
+      }
+    />
+  </View>
+  <View
+    style={
+      Object {
+        "alignSelf": "center",
+        "flexDirection": "row",
+        "width": "40%",
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#EEEEEE",
+          "fontWeight": "bold",
+        }
+      }
+    >
+      Age:  
+    </Text>
+    <Text
+      style={
+        Object {
+          "borderBottomWidth": 1,
+          "borderColor": "#00ADB5",
+          "color": "#EEEEEE",
+        }
+      }
+    />
+  </View>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+        "justifyContent": "space-evenly",
+      }
+    }
+  >
+    <View
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      testID="cancel"
+    >
+      <Text
+        style={
+          Object {
+            "alignSelf": "center",
+            "backgroundColor": "#00ADB5",
+            "borderRadius": 30,
+            "color": "#EEEEEE",
+            "fontSize": 16,
+            "fontWeight": "bold",
+            "marginTop": 20,
+            "padding": 12,
+          }
+        }
+      >
+        Close
+      </Text>
+    </View>
+  </View>
+</Mocked Modal React Native>
+`;

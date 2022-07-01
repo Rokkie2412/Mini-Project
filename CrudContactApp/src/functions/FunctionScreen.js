@@ -1,15 +1,12 @@
-/**
- * @flow
- */
-
 import axios from 'axios'
+import NetInfo from "@react-native-community/netinfo";
+import RNRestart from 'react-native-restart';
 import { launchCamera,launchImageLibrary } from "react-native-image-picker"
 
-
-export const getData = (setData:Function,Data:Object):Function =>{
+export const getData = (setData:Function,Data:Object,FilteredData:Object,setFilteredData:Function):Function =>{
     axios.get('https://simple-contact-crud.herokuapp.com/contact')
     .then(res=>{
-    console.log(res.data.data)
+    setFilteredData(res.data.data)
     setData(res.data.data)
     })
     return Data
@@ -29,20 +26,34 @@ export const addData = (first:string,last:string,age:number,foto:string):void =>
     })
 }
 
-// export const FilterSearch = (text:string,Contact:String,setTempContact:Function,setText:Function):void => {
-//     if(text){
-//         const newData = Contact.filter((item)=>{
-//             const itemData = item.firstName ? item.firstName.toUpperCase() : "".toUpperCase()
-//             const textData = text.toUpperCase()
-//             return itemData.indexOf(textData) > -1
-//         })
-//         setTempContact(newData)
-//         setText(text)
-//     }else{
-//         setTempContact(Contact)
-//         setText(text)
-//     }
-// }
+export const putData = (first:string,last:string,age:number,foto:string,id:string):void =>{
+    axios.put(`https://simple-contact-crud.herokuapp.com/contact/${id}`,{
+        'firstName' : first,
+        'lastName' : last,
+        'age' : age,
+        'photo' : foto
+    },
+    {
+        headers:{
+            'content-type' : 'application/json',
+        }
+    })
+}
+
+export const FilterSearch = (text:string,Contact:String,setTempContact:Function,setText:Function):void => {
+    if(text){
+        const newData = Contact.filter((item)=>{
+            const itemData = item.firstName ? item.firstName.toUpperCase() : "".toUpperCase()
+            const textData = text.toUpperCase()
+            return itemData.indexOf(textData) > -1
+        })
+        setTempContact(newData)
+        setText(text)
+    }else{
+        setTempContact(Contact)
+        setText(text)
+    }
+}
 
 export const openCamera = (image:string,setImage:Function):Function => {
         
@@ -128,4 +139,21 @@ export const emptyAll = (setImage:Function,setLast:Function,setFirst:Function,se
     setLast('')
     setFirst('')
     setAge('')
+}
+
+export const FuncRepeat = (text:string,setRepeat:Function):void =>{
+    if(text.length === 0){
+        setRepeat(1000)
+    }else{
+        setRepeat(100000)
+    }
+}
+
+export const CheckInternet = (set:Function):void =>{
+    NetInfo.fetch('https://simple-contact-crud.herokuapp.com/contact')
+    .then(networkState=>{
+        if(networkState.isConnected !== true){
+            set(true)
+        }
+    })
 }

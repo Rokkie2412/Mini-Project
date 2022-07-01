@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing for SearchBar Snapshot for SearchBar Should render correctly 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#393E46",
+      "borderRadius": 9,
+      "flexDirection": "row",
+      "height": 50,
+      "marginBottom": 10,
+      "marginHorizontal": 15,
+      "marginTop": 10,
+    }
+  }
+>
+  <Mocked Ionicons
+    name="search"
+    style={
+      Object {
+        "alignSelf": "center",
+        "color": "#fff",
+        "fontSize": 30,
+        "marginHorizontal": 15,
+      }
+    }
+  />
+  <TextInput
+    autoCapitalize="none"
+    autoCorrect={false}
+    onChangeText={[Function]}
+    placeholder="Search"
+    placeholderTextColor="#Ffff"
+    style={
+      Object {
+        "flex": 1,
+        "fontSize": 18,
+      }
+    }
+    testID="Search"
+  />
+</View>
+`;
