@@ -6,7 +6,7 @@ import * as React from 'react'
 import {View,Text,KeyboardAvoidingView,FlatList,Pressable,Image} from 'react-native'
 import styles from '../styles/ContactAppStyle'
 import {useEffect,useState} from 'react'
-import {getData,FilterSearch,FuncRepeat,CheckInternet} from '../functions/FunctionScreen'
+import {getData,FilterSearch,FuncRepeat,CheckInternet,Restart} from '../functions/FunctionScreen'
 import Icon from 'react-native-vector-icons/Ionicons'
 import AddContactModal from '../components/AddContactModal'
 import Searchbar from '../components/Searchbar'
@@ -40,6 +40,37 @@ const ContactApp = ({navigation}:Object):React.Node =>{
     return () => clearInterval(interval);
     },[]);
 
+    const _render = ({item}) =>{
+        return(
+            <View style={styles.flatcontainer}>   
+                <Pressable
+                testID='FlatlistButton'
+                onPress={()=>{
+                setId(item.id)
+                setFirst(item.firstName)
+                setLast(item.lastName)
+                setAge(item.age)
+                setImage(item.photo)
+                setShowCard(true)
+                }}
+                onLongPress={()=>{
+                setId(item.id)
+                setFirst(item.firstName)
+                setLast(item.lastName)
+                setAge(item.age)
+                setImage(item.photo)
+                setShowEdit(true)
+                }}
+                style={styles.contactList}>
+                    {item.photo === "N/A" ? <Icon style={styles.personIcon} name="person"/> :
+                    <Image style={styles.imagesPerson} source={{uri:`${item.photo}`}}/>
+                    }
+                    <Text style={styles.nameList}>{item.firstName} {item.lastName}</Text>
+                    </Pressable>
+            </View>
+        )
+    }
+
     return(
         <KeyboardAvoidingView 
         style={styles.mainContainer}>
@@ -53,36 +84,7 @@ const ContactApp = ({navigation}:Object):React.Node =>{
                     showsVerticalScrollIndicator={false}
                     data={filteredData.sort((a,b)=>a.firstName.localeCompare(b.firstName))}
                     keyExtractor={({id},index)=>id}
-                    renderItem={({item})=>{
-                        return(
-                            <View style={styles.flatcontainer}>   
-                                <Pressable
-                                testID='FlatlistButton'
-                                onPress={()=>{
-                                    setId(item.id)
-                                    setFirst(item.firstName)
-                                    setLast(item.lastName)
-                                    setAge(item.age)
-                                    setImage(item.photo)
-                                    setShowCard(true)
-                                }}
-                                onLongPress={()=>{
-                                    setId(item.id)
-                                    setFirst(item.firstName)
-                                    setLast(item.lastName)
-                                    setAge(item.age)
-                                    setImage(item.photo)
-                                    setShowEdit(true)
-                                }}
-                                style={styles.contactList}>
-                                    {item.photo === "N/A" ? <Icon style={styles.personIcon} name="person"/> :
-                                    <Image style={styles.imagesPerson} source={{uri:`${item.photo}`}}/>
-                                    }
-                                    <Text style={styles.nameList}>{item.firstName} {item.lastName}</Text>
-                                </Pressable>
-                            </View>
-                        )
-                    }}
+                    renderItem={_render}
                 />
             </View>
             <Pressable 
@@ -113,12 +115,11 @@ const ContactApp = ({navigation}:Object):React.Node =>{
                 showConfirmButton={true}
                 confirmText="Restart application"
                 confirmButtonColor="#00ADB5"
-                onConfirmPressed={()=>{
-                    RNRestart.Restart()
-                }}
+                onConfirmPressed={Restart}
             />
         </KeyboardAvoidingView>
     )
 }
 
 export default ContactApp
+

@@ -29,7 +29,8 @@ describe('Testing for Modal Edit Contact', () => {
         act(()=>person.onPress())
         const cancel = tree.root.findByProps({testID:'cancel'}).props
         act(()=>cancel.onPress())
-        expect(pack).toBeCalled()
+        const add = tree.root.findByProps({testID:'Add'}).props
+        act(()=>add.onPress())
     })
   })
   describe('Textinput onChangeText', () => {

@@ -15,6 +15,7 @@
     "@react-navigation/native": "^6.0.10",
     "@react-navigation/native-stack": "^6.6.2",
     "axios": "^0.27.2",
+    "axios-mock-adapter": "^1.21.1",
     "persist": "^0.2.7",
     "react": "17.0.2",
     "react-native": "0.68.2",
@@ -39,6 +40,7 @@
     "flow-bin": "^0.170.0",
     "jest": "^26.6.3",
     "metro-react-native-babel-preset": "^0.67.0",
+    "react-native-testing-library": "^6.0.0",
     "react-test-renderer": "17.0.2"
   },
   "jest": {

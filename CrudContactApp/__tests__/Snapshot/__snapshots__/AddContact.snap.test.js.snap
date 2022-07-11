@@ -40,20 +40,7 @@ exports[`Testing for Modal Edit Contact Snapshot for Edit Contact should render 
         style={Object {}}
         testID="person"
       >
-        <Mocked Ionicons
-          name="person"
-          style={
-            Object {
-              "alignSelf": "center",
-              "backgroundColor": "#00ADB5",
-              "borderRadius": 50,
-              "color": "#EEEEEE",
-              "fontSize": 50,
-              "margin": "9%",
-              "padding": 15,
-            }
-          }
-        />
+        <View />
       </View>
       <View
         style={
@@ -185,6 +172,7 @@ exports[`Testing for Modal Edit Contact Snapshot for Edit Contact should render 
               "justifyContent": "space-evenly",
             }
           }
+          testID="Add"
         >
           <Text
             style={

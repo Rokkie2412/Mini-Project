@@ -8,7 +8,7 @@ import {useState} from 'react'
 import {View,KeyboardAvoidingView,Pressable,TextInput,Text,Image} from 'react-native'
 import Modal from "react-native-modal";
 import type {Add} from './component.type'
-import {addData,AddorEditContactLock,emptyAll} from '../functions/FunctionScreen'
+import {addData,AddorEditContactLock,emptyAll,AddPack} from '../functions/FunctionScreen'
 import Icon from 'react-native-vector-icons/Ionicons'
 import styles from '../styles/ModalAddContact.style'
 import AwesomeAlert from './AwesomeAlert';
@@ -21,14 +21,19 @@ const AddContactModal = ({showmodal,setmodal}:Add):React.Node =>{
     const [image,setImage] = useState<string>('N/A')
     const [error,setError] = useState<string>('')
 
-    const AddPack = ():void =>{
-        setmodal(false)
-        const tempPasre = parseInt(age)
-        addData(first,last,tempPasre,image)
-        setError('')
-        emptyAll(setImage,setLast,setFirst,setAge)
+    const Add = () =>{
+        AddorEditContactLock(first,last,age) === true?
+        AddPack(setmodal,age,first,last,image,setImage,setLast,setFirst,setAge,setError):
+        setError('*Make sure name have 3 character length  and age between 1-99')
     }
 
+    const imageorPhoto = () =>{
+        if(image === 'N/A'){
+            <Icon style={styles.personIcon} name="person"/>
+        }else{
+            <Image style={styles.imagesPerson} source={{uri:`${image}`}}/>
+        }
+    }
 
     return(
         <KeyboardAvoidingView
@@ -45,9 +50,7 @@ const AddContactModal = ({showmodal,setmodal}:Add):React.Node =>{
                     testID='person'
                     onPress={()=>setshow(!show)}
                     style={styles.personIconView}>
-                         {image === "N/A" ? <Icon style={styles.personIcon} name="person"/> :
-                        <Image style={styles.imagesPerson} source={{uri:`${image}`}}/>
-                        }
+                         <View>{imageorPhoto()}</View>
                     </Pressable>
                     <View style={styles.TextInputSection}>
                         <TextInput
@@ -88,13 +91,8 @@ const AddContactModal = ({showmodal,setmodal}:Add):React.Node =>{
                             <Text style={styles.Button}>Cancel</Text>
                         </Pressable>
                         <Pressable
-                        onPress={()=>{
-                            {
-                                AddorEditContactLock(first,last,age) === true?
-                                AddPack():
-                                setError('*Make sure name have 3 character length  and age between 1-99')
-                            }
-                        }}
+                        testID='Add'
+                        onPress={Add}
                          style={styles.Container}>
                             <Text style={styles.Button}>Add</Text>
                         </Pressable>

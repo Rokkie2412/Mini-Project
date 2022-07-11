@@ -1,7 +1,10 @@
 import axios from 'axios'
+import * as React from 'react'
 import NetInfo from "@react-native-community/netinfo";
 import RNRestart from 'react-native-restart';
 import { launchCamera,launchImageLibrary } from "react-native-image-picker"
+import styles from '../styles/ContactAppStyle'
+import {View,Text,KeyboardAvoidingView,FlatList,Pressable,Image} from 'react-native'
 
 export const getData = (setData:Function,Data:Object,FilteredData:Object,setFilteredData:Function):Function =>{
     axios.get('https://simple-contact-crud.herokuapp.com/contact')
@@ -40,7 +43,7 @@ export const putData = (first:string,last:string,age:number,foto:string,id:strin
     })
 }
 
-export const FilterSearch = (text:string,Contact:String,setTempContact:Function,setText:Function):void => {
+export const FilterSearch = (text:string,Contact:Object,setTempContact:Function,setText:Function):void => {
     if(text){
         const newData = Contact.filter((item)=>{
             const itemData = item.firstName ? item.firstName.toUpperCase() : "".toUpperCase()
@@ -157,3 +160,15 @@ export const CheckInternet = (set:Function):void =>{
         }
     })
 }
+export const AddPack = (setmodal:Function,age:string,first,last,image,setImage,setLast,setFirst,setAge,setError):void =>{
+        setmodal(false)
+        const tempPasre = parseInt(age)
+        addData(first,last,tempPasre,image)
+        setError('')
+        emptyAll(setImage,setLast,setFirst,setAge)
+    }
+
+export const Restart = ():void =>{
+    RNRestart.Restart()
+}
+       
